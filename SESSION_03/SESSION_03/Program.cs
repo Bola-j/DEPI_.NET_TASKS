@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
+using System.Transactions;
 
 namespace SESSION_03
 {
@@ -8,7 +9,7 @@ namespace SESSION_03
     {
         static void Main(string[] args)
         {
-            #region Question 1
+            #region Ques. 01
             //Console.Write("Enter a number: ");
             //int X; X = int.Parse(Console.ReadLine());
             //if (X%3 == 0 && X%4 == 0)
@@ -21,7 +22,7 @@ namespace SESSION_03
             //}
             #endregion
 
-            #region Question 2
+            #region Ques. 02
             //Console.Write("Enter a number: ");
             //int Y; Y = int.Parse(Console.ReadLine());
             ////Console.WriteLine(Y);
@@ -39,7 +40,7 @@ namespace SESSION_03
             //}
             #endregion
 
-            #region Question 3
+            #region Ques. 03
             //    int A,B,C;
             //    Console.Write("Enter first number: ");
             //    A = int.Parse(Console.ReadLine());
@@ -77,7 +78,7 @@ namespace SESSION_03
             //}
             #endregion
 
-            #region Question 4
+            #region Ques. 04
             //int num; 
             //Console.Write("Enter a number: ");
             //num = int.Parse(Console.ReadLine());
@@ -91,7 +92,7 @@ namespace SESSION_03
             //}
             #endregion
 
-            #region Question 5
+            #region Ques. 05
             //Console.Write("Enter a character: ");
             //char ch = Console.ReadLine()[0];
             //ch = ch.ToString().ToLower()[0];
@@ -106,7 +107,7 @@ namespace SESSION_03
             //}
             #endregion
 
-            #region Question 6
+            #region Ques. 06
             //Console.Write("Enter a number greater than 1:");
             //int n;
             //n = int.Parse(Console.ReadLine());
@@ -117,7 +118,7 @@ namespace SESSION_03
             //Console.WriteLine();
             #endregion
 
-            #region Ques 7
+            #region Ques. 07
             //Console.Write("Enter a number:");
             //int number;
             //number = int.Parse(Console.ReadLine());
@@ -128,7 +129,7 @@ namespace SESSION_03
             //Console.WriteLine();
             #endregion
 
-            #region Question 8
+            #region Ques. 08
             //Console.Write("Enter a number greater than 1:");
             //int Z;
             //Z = int.Parse(Console.ReadLine());
@@ -139,7 +140,7 @@ namespace SESSION_03
             //Console.WriteLine();
             #endregion
 
-            #region Question 9
+            #region Ques. 09
             //int Base, Power;
             //Console.Write("Enter Base: ");
             //Base = int.Parse(Console.ReadLine());
@@ -154,7 +155,7 @@ namespace SESSION_03
             //Console.WriteLine(temp);
             #endregion
 
-            #region Question 10
+            #region Ques. 10
             //int total = 0, noOfSubs = 5;
             //float Avg, Percent;
             //for(int i = 0; i < noOfSubs; i++)
@@ -169,7 +170,7 @@ namespace SESSION_03
             //Console.WriteLine($"Percentage: %{Percent}");
             #endregion
 
-            #region Question 11
+            #region Ques. 11
             //Console.Write("Enter the month number: ");
             //int month = int.Parse(Console.ReadLine());
             //switch (month)
@@ -199,7 +200,7 @@ namespace SESSION_03
             //}
             #endregion
 
-            #region Question 12
+            #region Ques. 12
             //double num1, num2, result;
             //char operation;
 
@@ -243,7 +244,7 @@ namespace SESSION_03
             //}
             #endregion
 
-            #region Question 13
+            #region Ques. 13
             //Console.Write("Enter a string: ");
             //string str = Console.ReadLine();
             //string revStr = "";
@@ -256,7 +257,7 @@ namespace SESSION_03
             //Console.WriteLine($"Reversed string: {revStr}");
             #endregion
 
-            #region Question 14
+            #region Ques. 14
             //Console.Write("Enter a number: ");
             //int normalInt = int.Parse(Console.ReadLine());
             //int revInt = 0;
@@ -269,7 +270,7 @@ namespace SESSION_03
             //Console.WriteLine($"reversed intger is: {revInt}");
             #endregion
 
-            #region Question 15
+            #region Ques. 15
             //Console.Write("Enter starting number of the range: ");
             //int startingNum = int.Parse(Console.ReadLine());
             //Console.Write("Enter ending number of the range: ");
@@ -284,7 +285,7 @@ namespace SESSION_03
             //}
             #endregion
 
-            #region question 16
+            #region Ques. 16
             //Console.Write("Enter a decimal number to be converted into binary: ");
             //int decimalNum = int.Parse(Console.ReadLine());
             ////string binaryNum = Convert.ToString(decimalNum, 2);
@@ -300,7 +301,7 @@ namespace SESSION_03
             //Console.WriteLine($"Binary representation of {decimalNum} is: {binaryNum}");
             #endregion
 
-            #region Question 17
+            #region Ques. 17
             //Console.WriteLine("Enter first point");
             //Point p1 = new Point();
             //Console.Write("X1: ");
@@ -333,7 +334,7 @@ namespace SESSION_03
             //}
             #endregion
 
-            #region question 18
+            #region Ques. 18
             //Console.WriteLine("Enter the number of hours you spend on a task: ");
             //float hours = float.Parse(Console.ReadLine());
 
@@ -359,7 +360,7 @@ namespace SESSION_03
             //}
             #endregion
 
-            #region Question 19
+            #region Ques. 19
             //Console.WriteLine("Enter a number: ");
             //int num = int.Parse(Console.ReadLine());
             //for(int i = 1; i <= num; i++)
@@ -377,12 +378,197 @@ namespace SESSION_03
             //}
             #endregion
 
-            #region Question 20
-            int[] numbers = new int[] { 1, 2, 3, 4, 5, 6, 7 };
-            Console.WriteLine($"Sum = {numbers.Sum()}");
+            #region Ques. 20
+            //int[] numbers = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+            ////Console.WriteLine($"Sum = {numbers.Sum()}");
+            //int sum = 0;
+            //foreach(int num in numbers)
+            //{
+            //    sum += num;
+            //}
+            //Console.WriteLine(sum);
             #endregion
 
+            #region Ques. 21
+            //Console.Write("Enter the size of the arrays: ");
+            //int size = int.Parse(Console.ReadLine());
+
+            //int[] array1 = new int[size];
+            //int[] array2 = new int[size];
+
+            //Console.WriteLine("Enter elements for the first array:");
+            //for (int i = 0; i < size; i++)
+            //{
+            //    Console.Write($"Element {i + 1}: ");
+            //    array1[i] = int.Parse(Console.ReadLine());
+            //}
+
+            //Console.WriteLine("Enter elements for the second array:");
+            //for (int i = 0; i < size; i++)
+            //{
+            //    Console.Write($"Element {i + 1}: ");
+            //    array2[i] = int.Parse(Console.ReadLine());
+            //}
+
+            //int[] mergedArray = new int[size * 2];
+
+            //for (int i = 0; i < size; i++)
+            //{
+            //    mergedArray[i] = array1[i];
+            //    mergedArray[size + i] = array2[i];
+            //}
+
+            //Array.Sort(mergedArray);
+
+            //Console.WriteLine("Merged array in ascending order:");
+            //foreach (int num in mergedArray)
+            //{
+            //    Console.Write($"{num} ");
+            //}
+            //Console.WriteLine();
+            #endregion
+
+            #region Ques. 22
+            //Dictionary<int, int> elementsCount = new Dictionary<int, int>();
+            //int[] arr = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3 };
+            //foreach (var num in arr)
+            //{
+            //    Console.Write($"{num} ");
+            //    if (elementsCount.ContainsKey(num))
+            //    {
+            //        elementsCount[num]++;
+            //    }
+            //    else
+            //    {
+            //        elementsCount[num] = 1; 
+            //    }
+            //}
+            //Console.WriteLine();
+            //foreach (var element in elementsCount)
+            //{
+            //    Console.WriteLine($"Element: {element.Key}, Count: {element.Value}");
+            //}
+            #endregion
+
+            #region Ques. 23
+            //int max = int.MinValue, min = int.MaxValue;
+            //int[] array = new int[] { 42 ,56,67,243,234, 6000, 6790,2,3,53,6,8,9,22,1,0 };
+            //foreach (var num in array) 
+            //{
+            //    Console.Write($"{num} ");
+            //    if(max <= num)
+            //    {
+            //        max = num;
+            //    }
+            //    if (min >= num)
+            //    {
+            //        min = num;
+            //    }
+            //}
+            //Console.WriteLine();
+            //Console.WriteLine($"Minimum = {min}, Maximum = {max}");
+            #endregion
+
+            #region Ques. 24
+            //int[] array = new int[] { 42, 56, 67, 243, 234 ,6790, 2, 3, 53, 6, 8, 9, 22, 1, 0, 6000 };
+            ////the best method for the best performance,
+            ////better than looping once for the max and once for the secondMax
+            //Array.Sort(array);
+
+            //Console.WriteLine();
+            //Console.WriteLine($"second largest value = {array[^2]}");
+            #endregion
+
+            #region Ques. 25
+
+            //Console.WriteLine("Enter integers separated by space:");
+            //int[] array = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+            //int maxDistance = int.MinValue;
+            //Dictionary<int, int> leftElements = new Dictionary<int, int>();
+            //for (int i = 0; i < array.Length; i++)
+            //{
+            //    if (leftElements.ContainsKey(array[i]))
+            //    {
+            //        int distance = i - leftElements[array[i]] - 1;
+            //        if (distance >= maxDistance)
+            //        {
+            //            maxDistance = distance;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        leftElements[array[i]] = i; 
+            //    }
+
+            //}
+
+            //Console.WriteLine($"Maximum distance between identical elements: {maxDistance}");
+            #endregion
+
+            #region Ques. 26
+            //Console.WriteLine("Enter a sentence:");
+            //string[] array = Console.ReadLine().Split(' ');
+            //Array.Reverse(array);
+            //Console.WriteLine(string.Join(" ", array));
+            #endregion
+
+            #region Ques. 27
+            //Console.Write("Enter a number for first dimension: ");
+            //int n = int.Parse(Console.ReadLine());
+            //Console.Write("Enter a number for second dimension: ");
+            //int m = int.Parse(Console.ReadLine());
+
+            //int[,] x = new int[n,m];
+            //for (int i = 0; i < n; i++)
+            //{
+            //    Console.WriteLine($"Dimension {i+1}");
+            //    for (int j = 0; j < m; j++)
+            //    {       
+            //        Console.WriteLine($"Enter integer NO. {j+1}:");
+            //        x[i, j] = int.Parse(Console.ReadLine());
+            //    }
+            //}
+            //int[,] y = new int[n, m];
+            //y = (int[,])x.Clone();
+
+            //Console.WriteLine("\n\nX (original)\n");
+            //for (int i = 0; i < n; i++)
+            //{
+            //    for (int j = 0; j < m; j++)
+            //    {
+            //        Console.Write($"{x[i, j]} ");
+            //    }
+            //    Console.WriteLine();
+            //}
+            //Console.WriteLine("\n\nY (copy from X)\n");
+            //for (int i = 0; i < n; i++)
+            //{
+            //    for (int j = 0; j < m; j++)
+            //    {
+            //        Console.Write($"{y[i, j]} ");
+            //    }
+            //    Console.WriteLine();
+            //}
+            #endregion
+
+
+            #region Ques. 28
+            int[] arr = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             
+            Console.WriteLine("Original Array:");
+            foreach (int num in arr)
+            {
+                Console.Write($"{num} ");
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("Array Reversed:");
+            for (int i = arr.Length - 1; i >= 0; i--)
+            {
+                Console.Write($"{arr[i]} ");
+            }
+            Console.WriteLine();
+            #endregion
         }
         static bool isPrime(int n)
         {
