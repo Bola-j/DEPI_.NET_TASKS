@@ -1,4 +1,6 @@
-﻿using System.Runtime.Intrinsics.X86;
+﻿using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics.X86;
+using System.Text;
 
 namespace SESSION_03
 {
@@ -267,7 +269,130 @@ namespace SESSION_03
             //Console.WriteLine($"reversed intger is: {revInt}");
             #endregion
 
+            #region Question 15
+            //Console.Write("Enter starting number of the range: ");
+            //int startingNum = int.Parse(Console.ReadLine());
+            //Console.Write("Enter ending number of the range: ");
+            //int endingNum = int.Parse(Console.ReadLine());
+            //Console.Write($"Prime numbers between {startingNum} and {endingNum} are: ");
+            //for (int i = startingNum; i <= endingNum; i++)
+            //{
+            //    if (isPrime(i))
+            //    {
+            //        Console.Write($"{i} ");
+            //    }
+            //}
+            #endregion
 
+            #region question 16
+            //Console.Write("Enter a decimal number to be converted into binary: ");
+            //int decimalNum = int.Parse(Console.ReadLine());
+            ////string binaryNum = Convert.ToString(decimalNum, 2);
+            ////Console.WriteLine($"Binary representation of {decimalNum} is: {binaryNum}");
+            //StringBuilder binaryNum = new StringBuilder();
+            //binaryNum.Append('0', 32);
+            //while (decimalNum > 0)
+            //{
+            //    int MSBB = Convert.ToInt32(Math.Log2(decimalNum));
+            //    decimalNum -= (int)Math.Pow(2, MSBB);
+            //    binaryNum[31 - MSBB] = '1';
+            //}
+            //Console.WriteLine($"Binary representation of {decimalNum} is: {binaryNum}");
+            #endregion
+
+            #region Question 17
+            //Console.WriteLine("Enter first point");
+            //Point p1 = new Point();
+            //Console.Write("X1: ");
+            //p1.X = int.Parse(Console.ReadLine());
+            //Console.Write("Y1: ");
+            //p1.Y = int.Parse(Console.ReadLine());
+
+            //Console.WriteLine("Enter second point");
+            //Point p2 = new Point();
+            //Console.Write("X2: ");
+            //p2.X = int.Parse(Console.ReadLine());
+            //Console.Write("Y2: ");
+            //p2.Y = int.Parse(Console.ReadLine());
+
+            //Console.WriteLine("Enter third point");
+            //Point p3 = new Point();
+            //Console.Write("X3: ");
+            //p3.X = int.Parse(Console.ReadLine());
+            //Console.Write("Y3: ");
+            //p3.Y = int.Parse(Console.ReadLine());
+
+
+            //if (Point.lieOnSingleStraightLine(p1, p2, p3))
+            //{
+            //    Console.WriteLine("The points lie on a single straight line.");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("The points do not lie on a single straight line.");
+            //}
+            #endregion
+
+            #region question 18
+            //Console.WriteLine("Enter the number of hours you spend on a task: ");
+            //float hours = float.Parse(Console.ReadLine());
+
+            //if (hours >= 2 && hours < 3)
+            //{
+            //    Console.WriteLine("You are highly efficient.");
+            //}
+            //else if (hours >= 3 && hours < 4)
+            //{
+            //    Console.WriteLine("You need to increase your speed.");
+            //}
+            //else if (hours >= 4 && hours < 5)
+            //{
+            //    Console.WriteLine("You will be provided with training to enhance your speed.");
+            //}
+            //else if (hours >= 5)
+            //{
+            //    Console.WriteLine("You are required to leave the company.");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Invalid input: hours must be at least 2.");
+            //}
+            #endregion
+
+            #region Question 19
+            //Console.WriteLine("Enter a number: ");
+            //int num = int.Parse(Console.ReadLine());
+            //for(int i = 1; i <= num; i++)
+            //{
+            //    for (int j = 1; j <= num; j++)
+            //    {
+            //        if(j == i)
+            //        {
+            //            Console.Write("1 ");
+            //            continue;
+            //        }
+            //        Console.Write("0 ");
+            //    }
+            //    Console.WriteLine();
+            //}
+            #endregion
+
+            #region Question 20
+            int[] numbers = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+            Console.WriteLine($"Sum = {numbers.Sum()}");
+            #endregion
+
+            
+        }
+        static bool isPrime(int n)
+        {
+            if (n <= 1) return false;
+            for (int i = 2; i <= Math.Sqrt(n); i++)
+            {
+                if (n % i == 0)
+                    return false;
+            }
+            return true;
         }
     }
 }
