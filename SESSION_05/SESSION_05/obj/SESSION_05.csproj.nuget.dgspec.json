@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\DEPI_.NET_TASKS\\SESSION_04\\SESSION_04\\SESSION_04.csproj": {}
+    "D:\\DEPI_.NET_TASKS\\SESSION_05\\SESSION_05\\SESSION_05.csproj": {}
   },
   "projects": {
-    "D:\\DEPI_.NET_TASKS\\SESSION_04\\SESSION_04\\SESSION_04.csproj": {
+    "D:\\DEPI_.NET_TASKS\\SESSION_05\\SESSION_05\\SESSION_05.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DEPI_.NET_TASKS\\SESSION_04\\SESSION_04\\SESSION_04.csproj",
-        "projectName": "SESSION_04",
-        "projectPath": "D:\\DEPI_.NET_TASKS\\SESSION_04\\SESSION_04\\SESSION_04.csproj",
+        "projectUniqueName": "D:\\DEPI_.NET_TASKS\\SESSION_05\\SESSION_05\\SESSION_05.csproj",
+        "projectName": "SESSION_05",
+        "projectPath": "D:\\DEPI_.NET_TASKS\\SESSION_05\\SESSION_05\\SESSION_05.csproj",
         "packagesPath": "C:\\Users\\Bola_Gerges\\.nuget\\packages\\",
-        "outputPath": "D:\\DEPI_.NET_TASKS\\SESSION_04\\SESSION_04\\obj\\",
+        "outputPath": "D:\\DEPI_.NET_TASKS\\SESSION_05\\SESSION_05\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
