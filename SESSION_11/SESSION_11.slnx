@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SESSION_11/SESSION_11.csproj" />
+  <Project Path="SESSION_11.Tests/SESSION_11.Tests.csproj" />
+</Solution>
