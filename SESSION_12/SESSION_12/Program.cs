@@ -1,7 +1,11 @@
 ﻿using System.Collections;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Runtime.ConstrainedExecution;
+using System.Text.RegularExpressions;
+using System.Xml.Linq;
 using static System.Net.WebRequestMethods;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SESSION_12
 {
@@ -9,6 +13,10 @@ namespace SESSION_12
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("The Lists Having more than 20 elements, " +
+                "the first 10 rows were only printed to keep console clean and not crowded.");
+            Console.WriteLine();
+
             #region LINQ - Restriction Operators
 
             #region 1
@@ -29,7 +37,7 @@ namespace SESSION_12
             List<Product> productsMoreThan3 = products.Where(p => (p.UnitsInStock > 0 && p.UnitPrice > 3)).ToList();
             
             Console.WriteLine("Find all products that are in stock and cost more than 3.00 per unit.");
-            foreach (Product product in productsMoreThan3)
+            foreach (Product product in productsMoreThan3.Take(10))
             {
                 Console.WriteLine(product.ToString());
             }
@@ -38,7 +46,7 @@ namespace SESSION_12
             Console.WriteLine();
 
             #region 3
-                String[] Arr = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+                string[] Arr = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
 
                 var result = Arr.Where((s, i) => s.Length < i);
                 Console.WriteLine("Returns digits whose name is shorter than their value.");
@@ -103,7 +111,7 @@ namespace SESSION_12
                 .Select(c => new {c.CustomerName, OrderCount = c.Orders.Length});
 
             Console.WriteLine("Customers and their order count:");
-            foreach (var item in res)
+            foreach (var item in res.Take(10))
             {
                 Console.WriteLine($"Customer: {item.CustomerName}, Orders: {item.OrderCount}");
             }
@@ -118,7 +126,7 @@ namespace SESSION_12
             
             Console.WriteLine("Categories and their product count:");
 
-            foreach (var item in categories)
+            foreach (var item in categories.Take(10))
             {
                 Console.WriteLine($"Category: {item.Category} , NumOfProducts: {item.ProductCount}");
             }
@@ -182,11 +190,216 @@ namespace SESSION_12
 
             #endregion
 
+            Console.WriteLine();
+            Console.WriteLine();
 
-            # region LINQ - Ordering Operators
+            #region LINQ - Ordering Operators
+
+            
+            #region 1
+            var OrderedProducts = products.OrderBy(p => p.ProductName);
+            Console.WriteLine("Sort a list of products by name");
+            foreach (var product in OrderedProducts.Take(10))
+            {
+                Console.WriteLine(product.ToString());
+            }
+            #endregion
+            
+            
+            Console.WriteLine();
+
+            #region 2
+            Console.WriteLine("Uses a custom comparer to do a case-insensitive sort of the words in an array. (missed)");
+            string[] caseInSensitive = { "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
+            caseInSensitive = caseInSensitive.OrderBy(s => s, StringComparer.OrdinalIgnoreCase).ToArray();
+            foreach (var word in caseInSensitive) 
+            {
+                Console.WriteLine(word);
+            }
             #endregion
 
+            Console.WriteLine();
+
+            #region 3
+            Console.WriteLine("Sort a list of products by units in stock from highest to lowest.");
+            var decreasingStockUnitsProducts = products.OrderByDescending(p => p.UnitsInStock);
+            foreach (var product in decreasingStockUnitsProducts.Take(10))
+            {
+                Console.WriteLine(product.ToString());
+            }
+            #endregion
+
+            Console.WriteLine();
+
+            
+            #region 4
+            Console.WriteLine("Sort a list of digits, first by length of their name, and then alphabetically by the name itself.");
+            string[] s = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+            var sortedDigits = s
+                .OrderBy(str => str.Length)
+                .ThenBy(str => str).ToArray();
+
+            foreach (var digit in sortedDigits)
+                Console.WriteLine(digit);
+            #endregion
+
+            Console.WriteLine();
+
+            #region 5
+            Console.WriteLine("Sort first by word length and then by a case-insensitive sort of the words in an array.");
+
+            string[] StringArr = { "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
+            var sortedWords = StringArr
+                .OrderBy(str => str.Length)
+                .ThenBy(str => str, StringComparer.OrdinalIgnoreCase).ToArray();
+
+            foreach (var word in sortedWords)
+                Console.WriteLine(word);
+            #endregion
+
+            Console.WriteLine();
+
+            #region 6
+            Console.WriteLine("Sort a list of products, first by category, and then by unit price, from highest to lowest.");
+            var productsByCategoryThenPrice = products
+                .OrderBy(p => p.Category)
+                .ThenByDescending(p => p.UnitPrice);
+
+            foreach (var product in productsByCategoryThenPrice.Take(10))
+                Console.WriteLine(product.ToString());
+            #endregion
+
+            Console.WriteLine();
+
+            #region 7
+            Console.WriteLine("Sort first by-word length and then by " +
+                "a case-insensitive descending sort of the words in an array.");
+
+            var orderedStringArr = StringArr
+                .OrderBy(str => str.Length)
+                .ThenByDescending(str => str, StringComparer.OrdinalIgnoreCase).ToArray();
+
+            foreach (var product in orderedStringArr)
+                Console.WriteLine(product.ToString());
+            #endregion
+
+            Console.WriteLine();
+
+            #region 8
+            Console.WriteLine("Create a list of all digits in the array " +
+                "whose second letter is 'i' that is reversed from the order in the original array.");
+            string[] digitsStrings = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+
+            var reversedDigits = digitsStrings
+                .Where(str => str[1] == 'i')
+                .Reverse()
+                .ToArray();
+
+            foreach (var digit in reversedDigits)
+                Console.WriteLine(digit);
+            #endregion
+
+
+            #endregion
+
+            Console.WriteLine();
+            Console.WriteLine();
+
+
             #region LINQ – Transformation Operators
+
+
+            #region 1
+            Console.WriteLine("Return a sequence of just the names of a list of products.");
+            var productNames = products
+                .Select(p => p.ProductName)
+                .Distinct();
+
+            foreach(var name in productNames.Take(10))
+                Console.WriteLine(name);
+            #endregion
+
+            Console.WriteLine();
+
+            #region 2
+            Console.WriteLine("Produce a sequence of the uppercase and lowercase versions " +
+                "of each word in the original array (Anonymous Types).");
+
+            string[] words = { "aPPLE", "BlUeBeRrY", "cHeRry" };
+            var upperLowerWords = words
+                .Select(w => new { Upper = w.ToUpper(), Lower = w.ToLower() });
+
+            foreach (var word in upperLowerWords)
+                Console.WriteLine($"Uppercase: {word.Upper}, Lowercase: {word.Lower}");
+            #endregion
+
+            Console.WriteLine();
+
+            #region 3
+            Console.WriteLine("Produce a sequence containing some properties of Products, " +
+                "including UnitPrice which is renamed to Price in the resulting type.");
+
+            var productsList = products
+                .Select(p => new { p.ProductName, p.Category, Price = p.UnitPrice });
+            foreach (var product in productsList.Take(10))
+                Console.WriteLine($"Product: {product.ProductName}, Category: {product.Category}, Price: {product.Price}");
+            #endregion
+
+            Console.WriteLine();
+
+            #region 4
+            Console.WriteLine("Determine if the value of int in an array match their position in the array.");
+            Console.WriteLine("Array is zero-indexed");
+            int[] numArr = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+
+            numArr.Select((num, index) => new { Number = num, Index = index })
+                .ToList()
+                .ForEach(item => Console.WriteLine($"Number: {item.Number}, Index: {item.Index}, Match: {item.Number == item.Index}"));
+            #endregion
+
+
+            Console.WriteLine();
+
+            #region 5
+            Console.WriteLine("Returns all pairs of numbers from both arrays " +
+                "such that the number from numbersA is less than the number from numbersB.");
+            int[] numbersA = { 0, 2, 4, 5, 6, 8, 9 };
+            int[] numbersB = { 1, 3, 5, 7, 8 };
+            numbersA.Join(numbersB, a => true, b => true, (a, b) => new { A = a, B = b })
+                .Where(pair => pair.A < pair.B)
+                .ToList()
+                .ForEach(pair => Console.WriteLine($"A: {pair.A}, B: {pair.B}"));
+
+            #endregion
+
+            Console.WriteLine();
+
+            #region 6
+
+            Console.WriteLine("Select all orders where the order total is less than 50_000");
+            var ordersLessThan50k = ListGenerator.CustomersList
+                .SelectMany(c => c.Orders, (customer, order) => new { Customer = customer.CustomerName, Order = order })
+                .Where(co => co.Order.Total < 50000);
+
+            foreach (var item in ordersLessThan50k.Take(10))
+                Console.WriteLine($"Customer: {item.Customer}, Order: {item.Order}");
+
+            #endregion
+
+            Console.WriteLine();
+
+            #region 7
+            Console.WriteLine("Select all orders where the order was made in 1998 or later.");
+
+            var ordersFrom1998Onwards = ListGenerator.CustomersList
+                .SelectMany(c => c.Orders, (customer, order) => new { Customer = customer.CustomerName, Order = order })
+                .Where(co => co.Order.OrderDate.Year >= 1998);
+
+            foreach (var item in ordersFrom1998Onwards.Take(10))
+                Console.WriteLine($"Customer: {item.Customer}, Order: {item.Order}");
+
+            #endregion
+
             #endregion
         }
     }
