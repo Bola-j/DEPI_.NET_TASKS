@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="E-Commerce System/E-Commerce System.csproj" />
+  <Project Path="Health Care System/Health Care System.csproj" />
+  <Project Path="Library System/Library System.csproj" />
+</Solution>
