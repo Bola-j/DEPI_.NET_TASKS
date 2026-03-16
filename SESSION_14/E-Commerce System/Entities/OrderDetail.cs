@@ -19,7 +19,7 @@ namespace E_Commerce_System.Entities
         public Product Product { get; set; }
 
         public int Quantity { get; set; }
-
+            
         public override string ToString()
         {
             return $"OrderId: {OrderId}, ProductId: {ProductId}, Quantity: {Quantity}, Product: {Product?.Name}, OrderDate: {Order?.OrderDate}";

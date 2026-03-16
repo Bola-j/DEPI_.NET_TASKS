@@ -1,0 +1,133 @@
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Health Care System.exe
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Health Care System.deps.json
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Health Care System.runtimeconfig.json
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Health Care System.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Health Care System.pdb
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Azure.Core.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Azure.Identity.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Humanizer.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.Extensions.Caching.Abstractions.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.Identity.Client.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Mono.TextTemplating.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\System.ClientModel.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\System.CodeDom.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\System.Composition.AttributedModel.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\System.Composition.Convention.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\System.Composition.Hosting.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\System.Composition.Runtime.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\System.Composition.TypedParts.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\System.Drawing.Common.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\System.IO.Pipelines.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\System.Memory.Data.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\System.Runtime.Caching.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\System.Security.Permissions.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\System.Windows.Extensions.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\obj\Debug\net8.0\Health Care System.csproj.AssemblyReference.cache
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\obj\Debug\net8.0\Health Care System.GeneratedMSBuildEditorConfig.editorconfig
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\obj\Debug\net8.0\Health Care System.AssemblyInfoInputs.cache
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\obj\Debug\net8.0\Health Care System.AssemblyInfo.cs
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\obj\Debug\net8.0\Health Care System.csproj.CoreCompileInputs.cache
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\obj\Debug\net8.0\Health Care System.sourcelink.json
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\obj\Debug\net8.0\Health C.4E4B32A6.Up2Date
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\obj\Debug\net8.0\Health Care System.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\obj\Debug\net8.0\refint\Health Care System.dll
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\obj\Debug\net8.0\Health Care System.pdb
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\obj\Debug\net8.0\Health Care System.genruntimeconfig.cache
+D:\DEPI_.NET_TASKS\SESSION_14\Health Care System\obj\Debug\net8.0\ref\Health Care System.dll
