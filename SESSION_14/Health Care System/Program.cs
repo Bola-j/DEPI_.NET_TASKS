@@ -25,8 +25,8 @@ namespace Health_Care_System
                 new Doctor("Dr. Sara", "Neurology"),
                 new Doctor("Dr. Khalid", "Orthopedics")
             };
-            //context.Doctors.AddRange(doctors);
-            //context.SaveChanges();
+            context.Doctors.AddRange(doctors);
+            context.SaveChanges();
 
             //// Add Multiple Patients
             var patients = new List<Patient>
@@ -35,8 +35,8 @@ namespace Health_Care_System
                 new Patient("Fatima Hassan", new DateTime(2000, 3, 15)),
                 new Patient("Omar Youssef", new DateTime(1998, 12, 20))
             };
-            //context.Patients.AddRange(patients);
-            //context.SaveChanges();
+            context.Patients.AddRange(patients);
+            context.SaveChanges();
 
             //// Add Multiple Appointments
             var appointments = new List<Appointment>

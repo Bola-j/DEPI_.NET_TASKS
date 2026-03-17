@@ -1,28 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
 namespace Library_System.Entities
 {
     internal class Author
     {
+        [Key]
         public int Id { get; set; }
+
         [Required]
+        [StringLength(100, MinimumLength = 2)]
         public string Name { get; set; }
-        public DateOnly BirthDate { get; set; } = DateOnly.Parse("09/09/9999");
+
+        [DataType(DataType.Date)]
+        public DateOnly BirthDate { get; set; }
 
         public ICollection<Book> Books { get; set; }
-        public Author(string name, DateOnly birthDate)
-        {
-            Name = name;
-            BirthDate = birthDate;
-            Books = new List<Book>();
-        }
+
         public Author()
         {
+            Books = new List<Book>();
+        }
+
+        public Author(string name, DateOnly birthDate)
+        {
+            Name = name ?? throw new ArgumentNullException(nameof(name));
+            BirthDate = birthDate;
             Books = new List<Book>();
         }
 
