@@ -17,15 +17,15 @@ namespace Health_Care_System.Entities
         [ForeignKey(nameof(Patient))]
         public int PatientId { get; set; }
 
-        [Required]
-        public Patient Patient { get; set; }
+        // Navigation made nullable to allow EF to materialize without eager loading
+        public Patient? Patient { get; set; }
 
         [Required]
         [ForeignKey(nameof(Doctor))]
         public int DoctorId { get; set; }
 
-        [Required]
-        public Doctor Doctor { get; set; }
+        // Navigation made nullable to allow EF to materialize without eager loading
+        public Doctor? Doctor { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]
@@ -44,7 +44,9 @@ namespace Health_Care_System.Entities
 
         public override string ToString()
         {
-            return $"Appointment: {PatientId} with Dr. {DoctorId} on {AppointmentDate}";
+            var patientStr = Patient?.ToString() ?? $"PatientId {PatientId}";
+            var doctorStr = Doctor?.ToString() ?? $"DoctorId {DoctorId}";
+            return $"Appointment: {patientStr} with Dr. {doctorStr} on {AppointmentDate}";
         }
     }
 }

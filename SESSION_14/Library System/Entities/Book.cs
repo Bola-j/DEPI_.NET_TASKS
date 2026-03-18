@@ -23,8 +23,8 @@ namespace Library_System.Entities
         [ForeignKey(nameof(Author))]
         public int AuthorId { get; set; }
 
-        [Required]
-        public Author Author { get; set; }
+        // Navigation made nullable to allow EF to materialize without eager loading
+        public Author? Author { get; set; }
 
         public ICollection<Borrower> Borrowers { get; set; }
 

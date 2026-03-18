@@ -13,15 +13,15 @@ namespace E_Commerce_System.Entities
         [ForeignKey(nameof(Order))]
         public int OrderId { get; set; }
 
-        [Required]
-        public Order Order { get; set; }
+        // Navigation made nullable to allow EF to materialize without eager loading
+        public Order? Order { get; set; }
 
         [Required]
         [ForeignKey(nameof(Product))]
         public int ProductId { get; set; }
 
-        [Required]
-        public Product Product { get; set; }
+        // Navigation made nullable to allow EF to materialize without eager loading
+        public Product? Product { get; set; }
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Quantity must be at least 1.")]

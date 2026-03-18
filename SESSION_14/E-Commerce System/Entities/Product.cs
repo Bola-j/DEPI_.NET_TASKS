@@ -24,8 +24,8 @@ namespace E_Commerce_System.Entities
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
 
-        [Required]
-        public Category Category { get; set; }
+        // Navigation made nullable to allow EF to materialize without eager loading
+        public Category? Category { get; set; }
 
         public ICollection<OrderDetail> OrderDetails { get; set; }
 

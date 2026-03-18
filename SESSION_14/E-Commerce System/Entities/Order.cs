@@ -18,8 +18,8 @@ namespace E_Commerce_System.Entities
         [ForeignKey(nameof(Customer))]
         public int CustomerId { get; set; }
 
-        [Required]
-        public Customer Customer { get; set; }
+        // Navigation made nullable to allow EF to materialize without eager loading
+        public Customer? Customer { get; set; }
 
         public ICollection<OrderDetail> OrderDetails { get; set; }
 
@@ -39,4 +39,7 @@ namespace E_Commerce_System.Entities
 
         public override string ToString()
         {
-            return $"I
+            return $"Id: {Id}, OrderDate: {OrderDate}, CustomerId: {CustomerId}";
+        }
+    }
+}

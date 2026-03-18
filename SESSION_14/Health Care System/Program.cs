@@ -48,70 +48,70 @@ namespace Health_Care_System
                 new Appointment(patients[1], doctors[0], DateTime.Now.AddDays(5)),
                 new Appointment(patients[2], doctors[1], DateTime.Now.AddDays(6))
             };
-            //context.Appointments.AddRange(appointments);
-            //context.SaveChanges();
+            context.Appointments.AddRange(appointments);
+            context.SaveChanges();
             #endregion
 
             #region Update
-            //// Update all doctors in Cardiology to Internal Medicine
-            //var cardioDoctors = context.Doctors
-            //    .Where(d => d.Specialization == "Cardiology")
-            //    .ToList();
+            // Update all doctors in Cardiology to Internal Medicine
+            var cardioDoctors = context.Doctors
+                .Where(d => d.Specialization == "Cardiology")
+                .ToList();
 
-            //cardioDoctors.ForEach(d => d.Specialization = "Internal Medicine");
+            cardioDoctors.ForEach(d => d.Specialization = "Internal Medicine");
 
-            //context.Doctors.UpdateRange(cardioDoctors);
-            //context.SaveChanges();
-            //Console.WriteLine("Updated Cardiology doctors to Internal Medicine ");
+            context.Doctors.UpdateRange(cardioDoctors);
+            context.SaveChanges();
+            Console.WriteLine("Updated Cardiology doctors to Internal Medicine ");
 
-            //// Update patient names older than 25 to append "(Updated)"
-            //var oldPatients = context.Patients
-            //    .Where(p => (DateTime.Now.Year - p.DateOfBirth.Year) > 25)
-            //    .ToList();
+            // Update patient names older than 25 to append "(Updated)"
+            var oldPatients = context.Patients
+                .Where(p => (DateTime.Now.Year - p.DateOfBirth.Year) > 25)
+                .ToList();
 
-            //oldPatients.ForEach(p => { if (p.Name.Count(c => c == '(') < 1) p.Name += " (Updated)"; });
+            oldPatients.ForEach(p => { if (p.Name.Count(c => c == '(') < 1) p.Name += " (Updated)"; });
 
 
-            //context.Patients.UpdateRange(oldPatients);
-            //context.SaveChanges();
-            //Console.WriteLine("Updated patient names older than 25 ");
+            context.Patients.UpdateRange(oldPatients);
+            context.SaveChanges();
+            Console.WriteLine("Updated patient names older than 25 ");
 
-            // //Reschedule appointments by 7 days as dr of Id 2 is on leave
-            //var appointmentsToReschedule = context.Appointments
-            //    .Where(a => a.DoctorId == 2)
-            //    .ToList();
+            //Reschedule appointments by 7 days as dr of Id 2 is on leave
+            var appointmentsToReschedule = context.Appointments
+                .Where(a => a.DoctorId == 2)
+                .ToList();
 
-            //appointmentsToReschedule.ForEach(a => a.AppointmentDate = a.AppointmentDate.AddDays(7));
+            appointmentsToReschedule.ForEach(a => a.AppointmentDate = a.AppointmentDate.AddDays(7));
 
-            //context.Appointments.UpdateRange(appointmentsToReschedule);
-            //context.SaveChanges();
-            //Console.WriteLine("Rescheduled appointments for Dr. with Id 2 ");
+            context.Appointments.UpdateRange(appointmentsToReschedule);
+            context.SaveChanges();
+            Console.WriteLine("Rescheduled appointments for Dr. with Id 2 ");
             #endregion
 
             #region Read & Query
-            ////// Read all doctors and their appointments
-            //var doctorDetails = context.Doctors.Include(d => d.Appointments).ThenInclude(a => a.Patient).ToList();
-            //Console.WriteLine("Doctors and their Appointments:");
-            //foreach (var d in doctorDetails)
-            //{
-            //    Console.WriteLine($"{d.Name} ({d.Specialization})");
-            //    foreach (var a in d.Appointments)
-            //    {
-            //        Console.WriteLine($"  Appointment with {a.Patient.Name} on {a.AppointmentDate}");
-            //    }
-            //}
+            //// Read all doctors and their appointments
+            var doctorDetails = context.Doctors.Include(d => d.Appointments).ThenInclude(a => a.Patient).ToList();
+            Console.WriteLine("Doctors and their Appointments:");
+            foreach (var d in doctorDetails)
+            {
+                Console.WriteLine($"{d.Name} ({d.Specialization})");
+                foreach (var a in d.Appointments)
+                {
+                    Console.WriteLine($"  Appointment with {a.Patient.Name} on {a.AppointmentDate}");
+                }
+            }
 
-            ////// Query: Patients who have appointments with Dr. Sara
-            //var patientsWithSara = context.Appointments
-            //    .Include(a => a.Patient)
-            //    .Include(a => a.Doctor)
-            //    .Where(a => a.Doctor.Name == "Dr. Sara")
-            //    .Select(a => a.Patient.Name)
-            //    .Distinct()
-            //    .ToList();
+            //// Query: Patients who have appointments with Dr. Sara
+            var patientsWithSara = context.Appointments
+                .Include(a => a.Patient)
+                .Include(a => a.Doctor)
+                .Where(a => a.Doctor.Name == "Dr. Sara")
+                .Select(a => a.Patient.Name)
+                .Distinct()
+                .ToList();
 
-            //Console.WriteLine("\nPatients with appointments with Dr. Sara:");
-            //patientsWithSara.ForEach(Console.WriteLine);
+            Console.WriteLine("\nPatients with appointments with Dr. Sara:");
+            patientsWithSara.ForEach(Console.WriteLine);
             #endregion
 
             #region Delete

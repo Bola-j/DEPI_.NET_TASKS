@@ -13,15 +13,15 @@ namespace Library_System.Entities
         [ForeignKey(nameof(Book))]
         public int BookId { get; set; }
 
-        [Required]
-        public Book Book { get; set; }
 
         [Required]
         [ForeignKey(nameof(Borrower))]
         public int BorrowerId { get; set; }
 
-        [Required]
-        public Borrower Borrower { get; set; }
+        // Navigations made nullable to allow EF to materialize without eager loading
+        public Book? Book { get; set; }
+
+        public Borrower? Borrower { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
