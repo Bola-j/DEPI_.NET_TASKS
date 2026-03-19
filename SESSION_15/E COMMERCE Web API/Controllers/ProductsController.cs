@@ -67,9 +67,9 @@ namespace E_COMMERCE_Web_API.Controllers
             return Ok(product);
         }
         [HttpPost("api/products")]
-        public async Task<IActionResult> CreateProduct(CreateProductReuestDTO productDto)
+        public async Task<IActionResult> CreateProduct(CreateProductRequestDTO productDto)
         {
-            if (productDto != null) 
+            if (productDto != null)
             {
                 if (string.IsNullOrWhiteSpace(productDto.Name))
                 {
@@ -91,9 +91,62 @@ namespace E_COMMERCE_Web_API.Controllers
             return BadRequest("Invalid product data.");
         }
 
-        //[HttpPut("api/products/{id}")]
+        [HttpPut("api/products/{id}")]
+        public async Task<IActionResult> UpdateProduct(int id, UpdateProductRequestDTO request)
+        {
+            if (request == null)
+                return BadRequest("Product data is required.");
 
+            var product = await _context.Products
+                .FirstOrDefaultAsync(p => p.Id == id);
 
+            if (product == null)
+                return NotFound($"Product with Id = {id} not found.");
+
+            if (!string.IsNullOrWhiteSpace(request.NewProductName))
+            {
+                bool exists = await _context.Products
+                    .AnyAsync(p => p.Name == request.NewProductName && p.Id != id);
+
+                if (exists)
+                    return BadRequest("A product with this name already exists.");
+
+                product.Name = request.NewProductName;
+            }
+
+            if (request.NewCategoryId.HasValue)
+            {
+                var category = await _context.Categories
+                    .FirstOrDefaultAsync(c => c.Id == request.NewCategoryId.Value);
+
+                if (category == null)
+                    return NotFound("Category not found.");
+
+                product.CategoryId = category.Id;
+            }
+            else if (!string.IsNullOrWhiteSpace(request.NewCategoryName))
+            {
+                var category = await _context.Categories
+                    .FirstOrDefaultAsync(c => c.Name == request.NewCategoryName);
+
+                if (category == null)
+                    return NotFound("Category not found.");
+
+                product.CategoryId = category.Id;
+            }
+
+            if (request.ProductPrice.HasValue && request.ProductPrice > 0)
+            {
+                product.Price = request.ProductPrice.Value;
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok(new
+            {
+                Message = "Product updated successfully",
+                ProductId = product.Id
+            });
+        }
     }
-
 }
