@@ -20,7 +20,7 @@ namespace E_COMMERCE_Web_API.Controllers
         }
 
 
-        [HttpGet("api/products")]
+        [HttpGet]
         public async Task<IActionResult> GetAllProducts()
         {
             // I am using CategoryResponseDTO to only show Id , Name of the category
@@ -42,7 +42,7 @@ namespace E_COMMERCE_Web_API.Controllers
             return Ok(products);
         }
 
-        [HttpGet("api/products/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetProductById(int id)
         {
             var product = await _context.Products
@@ -66,7 +66,8 @@ namespace E_COMMERCE_Web_API.Controllers
             }
             return Ok(product);
         }
-        [HttpPost("api/products")]
+
+        [HttpPost]
         public async Task<IActionResult> CreateProduct(CreateProductRequestDTO productDto)
         {
             if (productDto != null)
@@ -91,7 +92,7 @@ namespace E_COMMERCE_Web_API.Controllers
             return BadRequest("Invalid product data.");
         }
 
-        [HttpPut("api/products/{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProduct(int id, UpdateProductRequestDTO request)
         {
             if (request == null)
@@ -145,6 +146,25 @@ namespace E_COMMERCE_Web_API.Controllers
             return Ok(new
             {
                 Message = "Product updated successfully",
+                ProductId = product.Id
+            });
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var product = await _context.Products
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product == null)
+                return NotFound($"Product with Id = {id} not found.");
+
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+
+            return Ok(new
+            {
+                Message = "Product deleted successfully",
                 ProductId = product.Id
             });
         }

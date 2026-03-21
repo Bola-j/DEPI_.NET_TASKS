@@ -20,7 +20,7 @@ namespace E_COMMERCE_Web_API.Controllers
             _context = context;
         }
 
-        [HttpGet("api/categories")]
+        [HttpGet]
         public async Task<IActionResult> GetAllCategories()
         {
             var categories = await _context.Categories
@@ -41,7 +41,7 @@ namespace E_COMMERCE_Web_API.Controllers
             return Ok(categories);
         }
 
-        [HttpGet("api/categories/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetCategoryById(int id)
         {
             var category = await _context.Categories
@@ -65,7 +65,7 @@ namespace E_COMMERCE_Web_API.Controllers
             }
             return Ok(category);
         }
-        [HttpPost("api/categories")]
+        [HttpPost]
         public async Task<IActionResult> CreateCategory(CreateCategoryRequestDTO request)
         {
             if (string.IsNullOrWhiteSpace(request.Name))
@@ -86,7 +86,7 @@ namespace E_COMMERCE_Web_API.Controllers
             return CreatedAtAction(nameof(GetCategoryById), new { id = category.Id }, response);
         }
 
-        [HttpPut("api/categories")]
+        [HttpPut]
         public async Task<IActionResult> UpdateCategory(UpdateCategoryRequestDTO request)
         {
             if (request == null)
@@ -123,6 +123,23 @@ namespace E_COMMERCE_Web_API.Controllers
             {
                 Message = "Category updated successfully",
                 CategoryId = category.Id
+            });
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            _context.Categories.Remove(category);
+            await _context.SaveChangesAsync();
+            return Ok(new
+            {
+                Message = "Category deleted successfully",
+                CategoryId = id
             });
         }
     }

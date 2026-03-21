@@ -1,3 +1,4 @@
+using E_COMMERCE_Web_API.Converters;
 using E_COMMERCE_Web_API.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,7 +21,10 @@ namespace E_COMMERCE_Web_API
 
             builder.Services.AddDbContext<ECommerceDbContext>(options =>
                 options.UseSqlServer("Server=.;Database=E_COMMERCE_SYSTEM_DB;Trusted_Connection=True;TrustServerCertificate=True;"));
-
+            builder.Services.AddControllers().AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new NullNormalizingStringConverter());
+                });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
