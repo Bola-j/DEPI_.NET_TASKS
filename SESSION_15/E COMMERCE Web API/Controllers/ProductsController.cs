@@ -26,12 +26,12 @@ namespace E_COMMERCE_Web_API.Controllers
             // I am using CategoryResponseDTO to only show Id , Name of the category
             var products = await _context.Products
                 .AsNoTracking()
-                .Select(p => new ProductsResponseDTO
+                .Select(p => new ProductDTO
                 {
                     Id = p.Id,
                     Name = p.Name,
                     Price = p.Price,
-                    Category = p.Category != null ? new SlimCategoryResponseDTO
+                    Category = p.Category != null ? new SlimCategoryDTO
                     {
                         Id = p.Category.Id,
                         Name = p.Category.Name
@@ -48,12 +48,12 @@ namespace E_COMMERCE_Web_API.Controllers
             var product = await _context.Products
                 .AsNoTracking()
                 .Where(p => p.Id == id)
-                .Select(p => new ProductsResponseDTO
+                .Select(p => new ProductDTO
                 {
                     Id = p.Id,
                     Name = p.Name,
                     Price = p.Price,
-                    Category = p.Category != null ? new SlimCategoryResponseDTO
+                    Category = p.Category != null ? new SlimCategoryDTO
                     {
                         Id = p.Category.Id,
                         Name = p.Category.Name
@@ -93,7 +93,7 @@ namespace E_COMMERCE_Web_API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProduct(int id, UpdateProductRequestDTO request)
+        public async Task<IActionResult> UpdateProduct(int id, UpdateProductRequest request)
         {
             if (request == null)
                 return BadRequest("Product data is required.");

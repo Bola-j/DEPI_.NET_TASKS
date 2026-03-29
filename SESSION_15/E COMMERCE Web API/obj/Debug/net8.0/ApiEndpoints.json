@@ -31,7 +31,7 @@
   },
   {
     "ContainingType": "E_COMMERCE_Web_API.Controllers.AnalyticsController",
-    "Method": "GetTotalNoOfOrders",
+    "Method": "GetTotalNoOfOrdersByCustomer",
     "RelativePath": "api/Analytics/orders/count/customer/{customerid}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -57,7 +57,7 @@
   },
   {
     "ContainingType": "E_COMMERCE_Web_API.Controllers.AnalyticsController",
-    "Method": "GetRevenue",
+    "Method": "GetRevenueByCustomer",
     "RelativePath": "api/Analytics/orders/revenue/customer/{customerid}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -101,7 +101,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "E_COMMERCE_Web_API.DTOs.CategoryDTOs.CreateCategoryRequestDTO",
+        "Type": "E_COMMERCE_Web_API.DTOs.CategoryDTOs.CreateCategoryRequest",
         "IsRequired": true
       }
     ],
@@ -117,7 +117,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "E_COMMERCE_Web_API.DTOs.CategoryDTOs.UpdateCategoryRequestDTO",
+        "Type": "E_COMMERCE_Web_API.DTOs.CategoryDTOs.UpdateCategoryRequest",
         "IsRequired": true
       }
     ],
@@ -389,7 +389,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[E_COMMERCE_Web_API.DTOs.OrderDetailDto, E COMMERCE Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[E_COMMERCE_Web_API.DTOs.OrderDetailDTO.OrderDetailDto, E COMMERCE Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -414,13 +414,13 @@
       },
       {
         "Name": "dto",
-        "Type": "E_COMMERCE_Web_API.DTOs.CreateOrderDetailDto",
+        "Type": "E_COMMERCE_Web_API.DTOs.OrderDetailDTO.CreateOrderDetailDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "E_COMMERCE_Web_API.DTOs.OrderDetailDto",
+        "Type": "E_COMMERCE_Web_API.DTOs.OrderDetailDTO.OrderDetailDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -451,7 +451,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "E_COMMERCE_Web_API.DTOs.OrderDetailDto",
+        "Type": "E_COMMERCE_Web_API.DTOs.OrderDetailDTO.OrderDetailDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -481,7 +481,7 @@
       },
       {
         "Name": "dto",
-        "Type": "E_COMMERCE_Web_API.DTOs.UpdateOrderDetailDto",
+        "Type": "E_COMMERCE_Web_API.DTOs.OrderDetailDTO.UpdateOrderDetailDto",
         "IsRequired": true
       }
     ],
@@ -591,7 +591,7 @@
       },
       {
         "Name": "request",
-        "Type": "E_COMMERCE_Web_API.DTOs.ProductsDTOs.UpdateProductRequestDTO",
+        "Type": "E_COMMERCE_Web_API.DTOs.ProductsDTOs.UpdateProductRequest",
         "IsRequired": true
       }
     ],

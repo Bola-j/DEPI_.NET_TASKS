@@ -25,11 +25,11 @@ namespace E_COMMERCE_Web_API.Controllers
         {
             var categories = await _context.Categories
                 .AsNoTracking()
-                .Select(c => new CategoryResponseDTO
+                .Select(c => new CategoryDTO
                 {
                     Id = c.Id,
                     Name = c.Name,
-                    Products = c.Products.Select(p => new SlimProductsResponseDTO
+                    Products = c.Products.Select(p => new SlimProductDTO
                     {
                         Id = p.Id,
                         Name = p.Name,
@@ -47,11 +47,11 @@ namespace E_COMMERCE_Web_API.Controllers
             var category = await _context.Categories
                 .AsNoTracking()
                 .Where(c => c.Id == id)
-                .Select(c => new CategoryResponseDTO
+                .Select(c => new CategoryDTO
                 {
                     Id = c.Id,
                     Name = c.Name,
-                    Products = c.Products.Select(p => new SlimProductsResponseDTO
+                    Products = c.Products.Select(p => new SlimProductDTO
                     {
                         Id = p.Id,
                         Name = p.Name,
@@ -66,7 +66,7 @@ namespace E_COMMERCE_Web_API.Controllers
             return Ok(category);
         }
         [HttpPost]
-        public async Task<IActionResult> CreateCategory(CreateCategoryRequestDTO request)
+        public async Task<IActionResult> CreateCategory(CreateCategoryRequest request)
         {
             if (string.IsNullOrWhiteSpace(request.Name))
             {
@@ -78,7 +78,7 @@ namespace E_COMMERCE_Web_API.Controllers
             };
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
-            var response = new SlimCategoryResponseDTO
+            var response = new SlimCategoryDTO
             {
                 Id = category.Id,
                 Name = category.Name
@@ -87,7 +87,7 @@ namespace E_COMMERCE_Web_API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateCategory(UpdateCategoryRequestDTO request)
+        public async Task<IActionResult> UpdateCategory(UpdateCategoryRequest request)
         {
             if (request == null)
             {

@@ -130,17 +130,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateCategoryRequestDTO"
+                "$ref": "#/components/schemas/CreateCategoryRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateCategoryRequestDTO"
+                "$ref": "#/components/schemas/CreateCategoryRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateCategoryRequestDTO"
+                "$ref": "#/components/schemas/CreateCategoryRequest"
               }
             }
           }
@@ -159,17 +159,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateCategoryRequestDTO"
+                "$ref": "#/components/schemas/UpdateCategoryRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateCategoryRequestDTO"
+                "$ref": "#/components/schemas/UpdateCategoryRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateCategoryRequestDTO"
+                "$ref": "#/components/schemas/UpdateCategoryRequest"
               }
             }
           }
@@ -960,17 +960,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateProductRequestDTO"
+                "$ref": "#/components/schemas/UpdateProductRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateProductRequestDTO"
+                "$ref": "#/components/schemas/UpdateProductRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateProductRequestDTO"
+                "$ref": "#/components/schemas/UpdateProductRequest"
               }
             }
           }
@@ -1006,7 +1006,7 @@
   },
   "components": {
     "schemas": {
-      "CreateCategoryRequestDTO": {
+      "CreateCategoryRequest": {
         "type": "object",
         "properties": {
           "name": {
@@ -1217,7 +1217,7 @@
         },
         "additionalProperties": false
       },
-      "UpdateCategoryRequestDTO": {
+      "UpdateCategoryRequest": {
         "type": "object",
         "properties": {
           "name": {
@@ -1278,7 +1278,7 @@
         },
         "additionalProperties": false
       },
-      "UpdateProductRequestDTO": {
+      "UpdateProductRequest": {
         "type": "object",
         "properties": {
           "newProductName": {
