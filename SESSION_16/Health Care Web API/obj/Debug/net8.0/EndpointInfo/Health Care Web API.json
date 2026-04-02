@@ -16,26 +16,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AppointmentDTO"
-                  }
+                  "$ref": "#/components/schemas/AppointmentDTOIEnumerableGenericResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AppointmentDTO"
-                  }
+                  "$ref": "#/components/schemas/AppointmentDTOIEnumerableGenericResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AppointmentDTO"
-                  }
+                  "$ref": "#/components/schemas/AppointmentDTOIEnumerableGenericResult"
                 }
               }
             }
@@ -71,17 +62,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/AppointmentDTO"
+                  "$ref": "#/components/schemas/AppointmentDTOGenericResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AppointmentDTO"
+                  "$ref": "#/components/schemas/AppointmentDTOGenericResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AppointmentDTO"
+                  "$ref": "#/components/schemas/AppointmentDTOGenericResult"
                 }
               }
             }
@@ -112,7 +103,24 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlimAppointmentDTOGenericResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlimAppointmentDTOGenericResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlimAppointmentDTOGenericResult"
+                }
+              }
+            }
           }
         }
       }
@@ -146,17 +154,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/AppointmentDTO"
+                  "$ref": "#/components/schemas/AppointmentDTOGenericResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AppointmentDTO"
+                  "$ref": "#/components/schemas/AppointmentDTOGenericResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AppointmentDTO"
+                  "$ref": "#/components/schemas/AppointmentDTOGenericResult"
                 }
               }
             }
@@ -188,7 +196,24 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlimAppointmentDTOGenericResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlimAppointmentDTOGenericResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlimAppointmentDTOGenericResult"
+                }
+              }
+            }
           }
         }
       }
@@ -204,26 +229,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/DoctorDTO"
-                  }
+                  "$ref": "#/components/schemas/DoctorDTOIEnumerableGenericResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/DoctorDTO"
-                  }
+                  "$ref": "#/components/schemas/DoctorDTOIEnumerableGenericResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/DoctorDTO"
-                  }
+                  "$ref": "#/components/schemas/DoctorDTOIEnumerableGenericResult"
                 }
               }
             }
@@ -259,17 +275,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/SlimDoctorDTO"
+                  "$ref": "#/components/schemas/SlimDoctorDTOGenericResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SlimDoctorDTO"
+                  "$ref": "#/components/schemas/SlimDoctorDTOGenericResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SlimDoctorDTO"
+                  "$ref": "#/components/schemas/SlimDoctorDTOGenericResult"
                 }
               }
             }
@@ -299,17 +315,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/DoctorDTO"
+                  "$ref": "#/components/schemas/DoctorDTOGenericResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DoctorDTO"
+                  "$ref": "#/components/schemas/DoctorDTOGenericResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DoctorDTO"
+                  "$ref": "#/components/schemas/DoctorDTOGenericResult"
                 }
               }
             }
@@ -373,7 +389,24 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlimDoctorDTOGenericResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlimDoctorDTOGenericResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlimDoctorDTOGenericResult"
+                }
+              }
+            }
           }
         }
       }
@@ -389,26 +422,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PatientDTO"
-                  }
+                  "$ref": "#/components/schemas/PatientDTOIEnumerableGenericResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PatientDTO"
-                  }
+                  "$ref": "#/components/schemas/PatientDTOIEnumerableGenericResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PatientDTO"
-                  }
+                  "$ref": "#/components/schemas/PatientDTOIEnumerableGenericResult"
                 }
               }
             }
@@ -444,17 +468,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/SlimPatientDTO"
+                  "$ref": "#/components/schemas/SlimPatientDTOGenericResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SlimPatientDTO"
+                  "$ref": "#/components/schemas/SlimPatientDTOGenericResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SlimPatientDTO"
+                  "$ref": "#/components/schemas/SlimPatientDTOGenericResult"
                 }
               }
             }
@@ -484,17 +508,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/PatientDTO"
+                  "$ref": "#/components/schemas/PatientDTOGenericResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PatientDTO"
+                  "$ref": "#/components/schemas/PatientDTOGenericResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PatientDTO"
+                  "$ref": "#/components/schemas/PatientDTOGenericResult"
                 }
               }
             }
@@ -558,7 +582,24 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlimPatientDTOGenericResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlimPatientDTOGenericResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlimPatientDTOGenericResult"
+                }
+              }
+            }
           }
         }
       }
@@ -586,6 +627,55 @@
           },
           "patient": {
             "$ref": "#/components/schemas/SlimPatientDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AppointmentDTOGenericResult": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isFailure": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "value": {
+            "$ref": "#/components/schemas/AppointmentDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AppointmentDTOIEnumerableGenericResult": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isFailure": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppointmentDTO"
+            },
+            "nullable": true,
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -689,6 +779,55 @@
         },
         "additionalProperties": false
       },
+      "DoctorDTOGenericResult": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isFailure": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "value": {
+            "$ref": "#/components/schemas/DoctorDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DoctorDTOIEnumerableGenericResult": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isFailure": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DoctorDTO"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PatientDTO": {
         "type": "object",
         "properties": {
@@ -714,6 +853,95 @@
         },
         "additionalProperties": false
       },
+      "PatientDTOGenericResult": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isFailure": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "value": {
+            "$ref": "#/components/schemas/PatientDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientDTOIEnumerableGenericResult": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isFailure": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientDTO"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SlimAppointmentDTO": {
+        "type": "object",
+        "properties": {
+          "Patient Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Doctor Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Appointment Date": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SlimAppointmentDTOGenericResult": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isFailure": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "value": {
+            "$ref": "#/components/schemas/SlimAppointmentDTO"
+          }
+        },
+        "additionalProperties": false
+      },
       "SlimDoctorDTO": {
         "type": "object",
         "properties": {
@@ -732,6 +960,28 @@
         },
         "additionalProperties": false
       },
+      "SlimDoctorDTOGenericResult": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isFailure": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "value": {
+            "$ref": "#/components/schemas/SlimDoctorDTO"
+          }
+        },
+        "additionalProperties": false
+      },
       "SlimPatientDTO": {
         "type": "object",
         "properties": {
@@ -746,6 +996,28 @@
           "Date Of Birth": {
             "type": "string",
             "format": "date"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SlimPatientDTOGenericResult": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isFailure": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "value": {
+            "$ref": "#/components/schemas/SlimPatientDTO"
           }
         },
         "additionalProperties": false

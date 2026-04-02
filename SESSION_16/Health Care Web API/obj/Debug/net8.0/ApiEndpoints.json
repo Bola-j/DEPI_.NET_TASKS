@@ -9,7 +9,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Health_Care_Web_API.DTOs.AppointmentDTO.AppointmentDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[System.Collections.Generic.IEnumerable\u00601[[Health_Care_Web_API.DTOs.AppointmentDTO.AppointmentDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -35,7 +35,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Health_Care_Web_API.DTOs.AppointmentDTO.AppointmentDTO",
+        "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[Health_Care_Web_API.DTOs.AppointmentDTO.AppointmentDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -64,7 +64,17 @@
         "IsRequired": false
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[Health_Care_Web_API.DTOs.AppointmentDTO.SlimAppointmentDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Health_Care_Web_API.Controllers.AppointmentsController",
@@ -87,7 +97,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Health_Care_Web_API.DTOs.AppointmentDTO.AppointmentDTO",
+        "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[Health_Care_Web_API.DTOs.AppointmentDTO.AppointmentDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -111,7 +121,17 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[Health_Care_Web_API.DTOs.AppointmentDTO.SlimAppointmentDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Health_Care_Web_API.Controllers.DoctorsController",
@@ -123,7 +143,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Health_Care_Web_API.DTOs.DoctorDTO.DoctorDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[System.Collections.Generic.IEnumerable\u00601[[Health_Care_Web_API.DTOs.DoctorDTO.DoctorDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -149,7 +169,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Health_Care_Web_API.DTOs.DoctorDTO.SlimDoctorDTO",
+        "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[Health_Care_Web_API.DTOs.DoctorDTO.SlimDoctorDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -175,7 +195,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Health_Care_Web_API.DTOs.DoctorDTO.DoctorDTO",
+        "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[Health_Care_Web_API.DTOs.DoctorDTO.DoctorDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -220,7 +240,17 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[Health_Care_Web_API.DTOs.DoctorDTO.SlimDoctorDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Health_Care_Web_API.Controllers.PatientsController",
@@ -232,7 +262,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Health_Care_Web_API.DTOs.PatientDTO.PatientDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[System.Collections.Generic.IEnumerable\u00601[[Health_Care_Web_API.DTOs.PatientDTO.PatientDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -258,7 +288,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Health_Care_Web_API.DTOs.PatientDTO.SlimPatientDTO",
+        "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[Health_Care_Web_API.DTOs.PatientDTO.SlimPatientDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -284,7 +314,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Health_Care_Web_API.DTOs.PatientDTO.PatientDTO",
+        "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[Health_Care_Web_API.DTOs.PatientDTO.PatientDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -329,6 +359,16 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[Health_Care_Web_API.DTOs.PatientDTO.SlimPatientDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]
