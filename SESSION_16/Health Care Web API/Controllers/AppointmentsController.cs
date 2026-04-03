@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Health_Care_Web_API.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Health_Care_Web_API.DTOs.AppointmentDTO;
+using Health_Care_Web_API.Models;
+using Health_Care_Web_API.Results;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Health_Care_Web_API.DTOs.DoctorDTO;
 using Health_Care_Web_API.DTOs.PatientDTO;
-using Microsoft.Extensions.Logging.Console;
-using Health_Care_Web_API.Results;
 
 namespace Health_Care_Web_API.Controllers
 {
@@ -15,42 +16,45 @@ namespace Health_Care_Web_API.Controllers
     public class AppointmentsController : ControllerBase
     {
         private readonly HEALTH_CARE_SYSTEM_DBContext _context;
-        private readonly ILogger<HEALTH_CARE_SYSTEM_DBContext> _logger;
+        private readonly ILogger<AppointmentsController> _logger;
+        private readonly IMapper _mapper;
 
-        public AppointmentsController(HEALTH_CARE_SYSTEM_DBContext context, ILogger<HEALTH_CARE_SYSTEM_DBContext> logger)
+        public AppointmentsController(HEALTH_CARE_SYSTEM_DBContext context, ILogger<AppointmentsController> logger, IMapper mapper)
         {
             _context = context;
             _logger = logger;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<GenericResult<IEnumerable<AppointmentDTO>>>> GetAppointments()
+        public async Task<ActionResult<GenericResult<PagedResult<AppointmentDTO>>>> GetAppointments(int page = 1, int pageSize = 10)
         {
-            var appointments = await _context.Appointments
-                .Select(a => new AppointmentDTO
-                {
-                    PatientId = a.PatientId,
-                    DoctorId = a.DoctorId,
-                    AppointmentDate = a.AppointmentDate,
-                    Doctor = new SlimDoctorDTO
-                    {
-                        Id = a.Doctor.Id,
-                        Name = a.Doctor.Name,
-                        Specialization = a.Doctor.Specialization
-                    },
-                    Patient = new SlimPatientDTO
-                    {
-                        Id = a.Patient.Id,
-                        Name = a.Patient.Name,
-                        DateOfBirth = DateOnly.FromDateTime(a.Patient.DateOfBirth)
-                    }
+            if (page < 1 || pageSize < 1)
+            {
+                _logger.LogWarning($"Invalid pagination parameters: page={page}, pageSize={pageSize}.");
+                return BadRequest(Result.Failure("Page and PageSize must be greater than 0."));
+            }
+            var query = _context.Appointments
+                .Include(a => a.Doctor)
+                .Include(a => a.Patient)
+                .AsNoTracking();
 
-                })
+            var totalCount = await query.CountAsync();
+
+            var appointments = await query
+                .OrderBy(a => a.AppointmentDate)
+                .ThenBy(a => a.PatientId)
+                .ThenBy(a => a.DoctorId)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ProjectTo<AppointmentDTO>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
-            _logger.LogInformation($"Retrieved {appointments.Count} appointments from the database.");
+            _logger.LogInformation(
+                $"Retrieved {appointments.Count} appointments (page {page}/{(int)Math.Ceiling((double)totalCount / pageSize)}).");
 
-            return Ok(GenericResult<IEnumerable<AppointmentDTO>>.Success(appointments));
+            return Ok(GenericResult<PagedResult<AppointmentDTO>>.Success(
+                new PagedResult<AppointmentDTO>(appointments, page, pageSize, totalCount)));
         }
 
         [HttpGet("ByPatientAndDoctor")]
@@ -58,24 +62,9 @@ namespace Health_Care_Web_API.Controllers
         {
             var appointment = await _context.Appointments
                 .Where(a => a.PatientId == PatientId && a.DoctorId == DocotrId)
-                .Select(a => new AppointmentDTO
-                {
-                    PatientId = a.PatientId,
-                    DoctorId = a.DoctorId,
-                    AppointmentDate = a.AppointmentDate,
-                    Doctor = new SlimDoctorDTO
-                    {
-                        Id = a.Doctor.Id,
-                        Name = a.Doctor.Name,
-                        Specialization = a.Doctor.Specialization
-                    },
-                    Patient = new SlimPatientDTO
-                    {
-                        Id = a.Patient.Id,
-                        Name = a.Patient.Name,
-                        DateOfBirth = DateOnly.FromDateTime(a.Patient.DateOfBirth)
-                    }
-                })
+                .Include(a => a.Doctor)
+                .Include(a => a.Patient)
+                .Select(a => _mapper.Map<AppointmentDTO>(a))
                 .FirstOrDefaultAsync();
 
             if (appointment == null)
@@ -112,42 +101,30 @@ namespace Health_Care_Web_API.Controllers
             }
 
 
-            var appointment = new Appointment
-            {
-                DoctorId = request.DoctorId,
-                PatientId = request.PatientId,
-                AppointmentDate = (request.AppointmentDate.HasValue && request.AppointmentDate.Value >= DateTime.Now) ? request.AppointmentDate.Value : DateTime.Now,
-            };
+            var appointment = _mapper.Map<Appointment>(request);
+            //    new Appointment
+            //{
+            //    DoctorId = request.DoctorId,
+            //    PatientId = request.PatientId,
+            //    AppointmentDate = (request.AppointmentDate.HasValue && request.AppointmentDate.Value >= DateTime.Now) ? request.AppointmentDate.Value : DateTime.Now,
+            //};
             _context.Appointments.Add(appointment);
             await _context.SaveChangesAsync();
 
-            var response = new AppointmentDTO
-            {
-                PatientId = appointment.PatientId,
-                DoctorId = appointment.DoctorId,
-                AppointmentDate = appointment.AppointmentDate,
-                Doctor = new SlimDoctorDTO
-                {
-                    Id = doctor.Id,
-                    Name = doctor.Name,
-                    Specialization = doctor.Specialization
-                },
-                Patient = new SlimPatientDTO
-                {
-                    Id = patient.Id,
-                    Name = patient.Name,
-                    DateOfBirth = DateOnly.FromDateTime(patient.DateOfBirth)
-                }
-            };
+            var response = _mapper.Map<AppointmentDTO>(appointment);
+            //var response = new AppointmentDTO
+            //{
+            //    PatientId = appointment.PatientId,
+            //    DoctorId = appointment.DoctorId,
+            //    AppointmentDate = appointment.AppointmentDate,
+            //    Doctor = _mapper.Map<SlimDoctorDTO>(doctor),
+            //    Patient = _mapper.Map<SlimPatientDTO>(patient)          
+                
+            //};
             _logger.LogInformation($"Created new appointment for DoctorId: {request.DoctorId} and PatientId: {request.PatientId}.");
 
             return CreatedAtAction(nameof(GetAppointment), new { DocotrId = appointment.DoctorId, PatientId = appointment.PatientId },
-                GenericResult<SlimAppointmentDTO>.Success(new SlimAppointmentDTO
-                {
-                    PatientId = appointment.PatientId,
-                    DoctorId = appointment.DoctorId,
-                    AppointmentDate = appointment.AppointmentDate
-                }));
+                GenericResult<SlimAppointmentDTO>.Success(_mapper.Map<SlimAppointmentDTO>(appointment)));
         }
 
         [HttpPut("ByPatientAndDoctor")]
@@ -180,12 +157,7 @@ namespace Health_Care_Web_API.Controllers
             _context.SaveChanges();
 
             _logger.LogInformation($"Updated appointment for DoctorId: {request.DoctorId} and PatientId: {request.PatientId} with new date: {appointment.AppointmentDate}.");
-            return Ok(GenericResult<SlimAppointmentDTO>.Success(new SlimAppointmentDTO
-            {
-                PatientId = appointment.PatientId,
-                DoctorId = appointment.DoctorId,
-                AppointmentDate = appointment.AppointmentDate
-            }));
+            return Ok(GenericResult<SlimAppointmentDTO>.Success(_mapper.Map<SlimAppointmentDTO>(appointment)));
         }
 
         [HttpDelete]
@@ -201,12 +173,7 @@ namespace Health_Care_Web_API.Controllers
             _context.SaveChanges();
             _logger.LogInformation($"Deleted appointment for DoctorId: {DoctorId} and PatientId: {PatientId}.");
 
-            return Ok(GenericResult<SlimAppointmentDTO>.Success(new SlimAppointmentDTO
-            {
-                PatientId = appointment.PatientId,
-                DoctorId = appointment.DoctorId,
-                AppointmentDate = appointment.AppointmentDate
-            }));
+            return Ok(GenericResult<SlimAppointmentDTO>.Success(_mapper.Map<SlimAppointmentDTO>(appointment)));
         }
 
     }

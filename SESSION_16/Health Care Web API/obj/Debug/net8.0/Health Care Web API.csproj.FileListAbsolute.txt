@@ -303,3 +303,6 @@ D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\refint\Health
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.pdb
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.genruntimeconfig.cache
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\ref\Health Care Web API.dll
+D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\AutoMapper.dll
+D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll

@@ -10,23 +10,43 @@
         "tags": [
           "Appointments"
         ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/AppointmentDTOIEnumerableGenericResult"
+                  "$ref": "#/components/schemas/AppointmentDTOPagedResultGenericResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AppointmentDTOIEnumerableGenericResult"
+                  "$ref": "#/components/schemas/AppointmentDTOPagedResultGenericResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AppointmentDTOIEnumerableGenericResult"
+                  "$ref": "#/components/schemas/AppointmentDTOPagedResultGenericResult"
                 }
               }
             }
@@ -223,6 +243,33 @@
         "tags": [
           "Doctors"
         ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -416,23 +463,50 @@
         "tags": [
           "Patients"
         ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/PatientDTOIEnumerableGenericResult"
+                  "$ref": "#/components/schemas/PatientDTOPagedResultGenericResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PatientDTOIEnumerableGenericResult"
+                  "$ref": "#/components/schemas/PatientDTOPagedResultGenericResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PatientDTOIEnumerableGenericResult"
+                  "$ref": "#/components/schemas/PatientDTOPagedResultGenericResult"
                 }
               }
             }
@@ -500,6 +574,24 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
           }
         ],
         "responses": {
@@ -561,7 +653,24 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlimPatientDTOGenericResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlimPatientDTOGenericResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlimPatientDTOGenericResult"
+                }
+              }
+            }
           }
         }
       },
@@ -653,7 +762,45 @@
         },
         "additionalProperties": false
       },
-      "AppointmentDTOIEnumerableGenericResult": {
+      "AppointmentDTOPagedResult": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppointmentDTO"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "hasPreviousPage": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasNextPage": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AppointmentDTOPagedResultGenericResult": {
         "type": "object",
         "properties": {
           "isSuccess": {
@@ -670,12 +817,7 @@
             "readOnly": true
           },
           "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AppointmentDTO"
-            },
-            "nullable": true,
-            "readOnly": true
+            "$ref": "#/components/schemas/AppointmentDTOPagedResult"
           }
         },
         "additionalProperties": false
@@ -875,7 +1017,45 @@
         },
         "additionalProperties": false
       },
-      "PatientDTOIEnumerableGenericResult": {
+      "PatientDTOPagedResult": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientDTO"
+            },
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "hasPreviousPage": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasNextPage": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientDTOPagedResultGenericResult": {
         "type": "object",
         "properties": {
           "isSuccess": {
@@ -892,12 +1072,7 @@
             "readOnly": true
           },
           "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PatientDTO"
-            },
-            "nullable": true,
-            "readOnly": true
+            "$ref": "#/components/schemas/PatientDTOPagedResult"
           }
         },
         "additionalProperties": false
@@ -1044,10 +1219,6 @@
       "UpdateDoctorRequest": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
           "name": {
             "type": "string",
             "nullable": true
@@ -1062,10 +1233,6 @@
       "UpdatePatientRequest": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
           "name": {
             "type": "string",
             "nullable": true

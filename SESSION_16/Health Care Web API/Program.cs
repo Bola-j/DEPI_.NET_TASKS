@@ -1,5 +1,6 @@
 using Health_Care_Web_API.Data;
 using Health_Care_Web_API.Models;
+using Health_Care_Web_API.Mappings;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,6 +32,7 @@ namespace Health_Care_Web_API
                 {
                     options.SuppressModelStateInvalidFilter = true;
                 });
+            builder.Services.AddAutoMapper(cfg => { }, typeof(MappingProfile));
 
             builder.Services.AddDbContext<HEALTH_CARE_SYSTEM_DBContext>(options =>
                     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))

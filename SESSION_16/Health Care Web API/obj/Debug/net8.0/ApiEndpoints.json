@@ -6,10 +6,21 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
-        "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[System.Collections.Generic.IEnumerable\u00601[[Health_Care_Web_API.DTOs.AppointmentDTO.AppointmentDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[Health_Care_Web_API.Results.PagedResult\u00601[[Health_Care_Web_API.DTOs.AppointmentDTO.AppointmentDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -140,7 +151,23 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[System.Collections.Generic.IEnumerable\u00601[[Health_Care_Web_API.DTOs.DoctorDTO.DoctorDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
@@ -259,10 +286,26 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
-        "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[System.Collections.Generic.IEnumerable\u00601[[Health_Care_Web_API.DTOs.PatientDTO.PatientDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[Health_Care_Web_API.Results.PagedResult\u00601[[Health_Care_Web_API.DTOs.PatientDTO.PatientDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -310,6 +353,16 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -343,7 +396,17 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "Health_Care_Web_API.Results.GenericResult\u00601[[Health_Care_Web_API.DTOs.PatientDTO.SlimPatientDTO, Health Care Web API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Health_Care_Web_API.Controllers.PatientsController",

@@ -7,6 +7,7 @@ using Health_Care_Web_API.DTOs.AppointmentDTO;
 using Health_Care_Web_API.DTOs.PatientDTO;
 using Microsoft.Extensions.Logging;
 using Health_Care_Web_API.Results;
+using AutoMapper;
 
 
 namespace Health_Care_Web_API.Controllers
@@ -17,62 +18,60 @@ namespace Health_Care_Web_API.Controllers
     {
         private readonly HEALTH_CARE_SYSTEM_DBContext _context;
         private readonly ILogger<DoctorsController> _logger;
+        private readonly IMapper _mapper;
 
-        public DoctorsController(HEALTH_CARE_SYSTEM_DBContext context, ILogger<DoctorsController> logger)
+        public DoctorsController(HEALTH_CARE_SYSTEM_DBContext context, ILogger<DoctorsController> logger, IMapper mapper)
         {
             _context = context;
             _logger = logger;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<GenericResult<IEnumerable<DoctorDTO>>>> GetDoctors()
+        public async Task<ActionResult<GenericResult<IEnumerable<DoctorDTO>>>> GetDoctors(string? name, int page = 1, int pageSize = 10)
         {
-            var doctorResponses = await _context.Doctors
-                .AsNoTracking()
-                .Select(d => new DoctorDTO
-                {
-                    Id = d.Id,
-                    Name = d.Name,
-                    Specialization = d.Specialization,
-                    Appointments = d.Appointments.Where(a => a.DoctorId == d.Id)
-                        .Select(a => new AppointmentWithPatientDTO
-                        {
-                            AppointmentDate = a.AppointmentDate,
-                            Patient = new SlimPatientDTO
-                            {
-                                Id = a.Patient.Id,
-                                Name = a.Patient.Name,
-                                DateOfBirth = DateOnly.FromDateTime(a.Patient.DateOfBirth)
-                            }
-                        }).ToList()
-                }).ToListAsync();
+            if (page < 1 || pageSize < 1)
+            {
+                _logger.LogWarning($"Invalid pagination parameters: page={page}, pageSize={pageSize}.");
+                return BadRequest(Result.Failure("Page and PageSize must be greater than 0."));
+            }
 
-            _logger.LogInformation($"Retrieved {doctorResponses.Count} doctors from the database.");
-            return Ok(GenericResult<IEnumerable<DoctorDTO>>.Success(doctorResponses));
+            var query = _context.Doctors
+                .Include(d => d.Appointments)
+                .ThenInclude(a => a.Patient)
+                .AsNoTracking();
+
+            var searchName = name?.Trim();
+            if (!string.IsNullOrWhiteSpace(searchName))
+                query = query.Where(p => EF.Functions.Like(p.Name, $"%{searchName}%"));
+
+            var totalCount = await query.CountAsync();
+
+
+
+            var doctorResponses = await query
+                .AsNoTracking()
+                .Select(d => _mapper.Map<DoctorDTO>(d))
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            _logger.LogInformation(
+                $"Retrieved {doctorResponses.Count} doctors (page {page}/{(int)Math.Ceiling((double)totalCount / pageSize)}) with filter: name='{name}'.");
+            return Ok(GenericResult<PagedResult<DoctorDTO>>.Success(
+                new PagedResult<DoctorDTO>(doctorResponses, page, pageSize, totalCount)));
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<GenericResult<DoctorDTO>>> GetDoctor(int id)
         {
             var doctor = await _context.Doctors
+                .Include(d => d.Appointments)
+                .ThenInclude(a => a.Patient)
                 .AsNoTracking()
                 .Where(d => d.Id == id)
-                .Select(d => new DoctorDTO
-                {
-                    Id = d.Id,
-                    Name = d.Name,
-                    Specialization = d.Specialization,
-                    Appointments = d.Appointments.Where(a => a.DoctorId == d.Id)
-                        .Select(a => new AppointmentWithPatientDTO
-                        {
-                            AppointmentDate = a.AppointmentDate,
-                            Patient = new SlimPatientDTO
-                            {
-                                Id = a.Patient.Id,
-                                Name = a.Patient.Name,
-                                DateOfBirth = DateOnly.FromDateTime(a.Patient.DateOfBirth)
-                            }
-                        }).ToList()
-                }).FirstOrDefaultAsync();
+                .Select(d => _mapper.Map<DoctorDTO>(d))
+                .FirstOrDefaultAsync();
             if (doctor == null)
             {
                 _logger.LogWarning($"No doctor found with Id: {id}.");
@@ -86,37 +85,25 @@ namespace Health_Care_Web_API.Controllers
         [HttpPost]
         public async Task<ActionResult<GenericResult<SlimDoctorDTO>>> CreateDoctor(CreateDoctorRequest request)
         {
-            var doctor = new Doctor();
 
-            if (!string.IsNullOrWhiteSpace(request.Name) || request.Name != "")
+            if (string.IsNullOrWhiteSpace(request.Name) || request.Name == "" || request.Name == "string")
             {
-                doctor.Name = request.Name;
-            }
-            else
-            {
+            
                 _logger.LogWarning("Attempted to create a doctor with an empty or whitespace name.");
                 return BadRequest(Result.Failure("Doctor name cannot be empty or whitespace."));
             }
 
-            if (!string.IsNullOrWhiteSpace(request.Specialization) || request.Specialization != "")
-            {
-                doctor.Specialization = request.Specialization;
-            }
-            else
+            if (string.IsNullOrWhiteSpace(request.Specialization) || request.Specialization == "" || request.Specialization == "string")
             {
                 _logger.LogWarning("Attempted to create a doctor with an empty or whitespace specialization.");
                 return BadRequest(Result.Failure("Doctor specialization cannot be empty or whitespace."));
             }
-
+            
+            var doctor = _mapper.Map<Doctor>(request);
             _context.Doctors.Add(doctor);
             await _context.SaveChangesAsync();
 
-            var doctorResponse = new SlimDoctorDTO
-            {
-                Id = doctor.Id,
-                Name = doctor.Name,
-                Specialization = doctor.Specialization
-            };
+            var doctorResponse = _mapper.Map<SlimDoctorDTO>(doctor);
 
             _logger.LogInformation($"Created doctor with Id: {doctor.Id}, Name: {doctor.Name}, Specialization: {doctor.Specialization}.");
 
@@ -135,7 +122,7 @@ namespace Health_Care_Web_API.Controllers
                 return NotFound(GenericResult<SlimDoctorDTO>.Failure($"No doctor found with Id: {id}."));
             }
 
-            if (!string.IsNullOrWhiteSpace(request.Name) || request.Name != "")
+            if (!string.IsNullOrWhiteSpace(request.Name) || request.Name != "" || request.Name != "string")
             {
 
                 doctor.Name = request.Name;
@@ -146,7 +133,7 @@ namespace Health_Care_Web_API.Controllers
                 return BadRequest(Result.Failure("Doctor name cannot be empty or whitespace."));
 
             }
-            if (!string.IsNullOrWhiteSpace(request.Specialization) || request.Specialization != "")
+            if (!string.IsNullOrWhiteSpace(request.Specialization) || request.Specialization != "" || request.Specialization != "string")
             {
                 doctor.Specialization = request.Specialization;
             }
@@ -160,7 +147,7 @@ namespace Health_Care_Web_API.Controllers
             await _context.SaveChangesAsync();
 
             _logger.LogInformation($"Updated doctor with Id: {id}, Name: {doctor.Name}, Specialization: {doctor.Specialization}.");
-            return NoContent();
+            return Ok(GenericResult<SlimDoctorDTO>.Success(_mapper.Map<SlimDoctorDTO>(doctor)));
         }
 
         [HttpDelete("{id}")]
@@ -176,12 +163,7 @@ namespace Health_Care_Web_API.Controllers
             await _context.SaveChangesAsync();
 
             _logger.LogInformation($"Deleted doctor with Id: {id}.");
-            return Ok(GenericResult<SlimDoctorDTO>.Success(new SlimDoctorDTO
-            {
-                Id = doctor.Id,
-                Name = doctor.Name,
-                Specialization = doctor.Specialization
-            }));
+            return Ok(GenericResult<SlimDoctorDTO>.Success(_mapper.Map<SlimDoctorDTO>(doctor)));
         }
     }
 }
