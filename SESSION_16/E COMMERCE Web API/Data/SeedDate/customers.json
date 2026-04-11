@@ -1,0 +1,12 @@
+[
+  { "Name": "Ahmed Hassan",    "Email": "ahmed.hassan@example.com" },
+  { "Name": "Sara Mohamed",    "Email": "sara.mohamed@example.com" },
+  { "Name": "Omar Tarek",      "Email": "omar.tarek@example.com" },
+  { "Name": "Nour Adel",       "Email": "nour.adel@example.com" },
+  { "Name": "Youssef Ali",     "Email": "youssef.ali@example.com" },
+  { "Name": "Mona Khaled",     "Email": "mona.khaled@example.com" },
+  { "Name": "Karim Samir",     "Email": "karim.samir@example.com" },
+  { "Name": "Heba Ibrahim",    "Email": "heba.ibrahim@example.com" },
+  { "Name": "Tamer Mahmoud",   "Email": "tamer.mahmoud@example.com" },
+  { "Name": "Dina Youssef",    "Email": "dina.youssef@example.com" }
+]

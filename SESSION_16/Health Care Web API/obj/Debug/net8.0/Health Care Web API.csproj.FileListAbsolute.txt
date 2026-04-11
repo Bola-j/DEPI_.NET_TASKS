@@ -147,15 +147,6 @@ D:\DEPI_.NET_TASKS\SESSION_15\Health Care Web API\obj\Debug\net8.0\refint\Health
 D:\DEPI_.NET_TASKS\SESSION_15\Health Care Web API\obj\Debug\net8.0\Health Care Web API.pdb
 D:\DEPI_.NET_TASKS\SESSION_15\Health Care Web API\obj\Debug\net8.0\Health Care Web API.genruntimeconfig.cache
 D:\DEPI_.NET_TASKS\SESSION_15\Health Care Web API\obj\Debug\net8.0\ref\Health Care Web API.dll
-D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.csproj.AssemblyReference.cache
-D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\rpswa.dswa.cache.json
-D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.GeneratedMSBuildEditorConfig.editorconfig
-D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.AssemblyInfoInputs.cache
-D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.AssemblyInfo.cs
-D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.csproj.CoreCompileInputs.cache
-D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.MvcApplicationPartsAssemblyInfo.cs
-D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.MvcApplicationPartsAssemblyInfo.cache
-D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.sourcelink.json
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\appsettings.Development.json
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\appsettings.json
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\Data\SeedData\appointments.json
@@ -168,6 +159,7 @@ D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\Health Care W
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\Health Care Web API.runtimeconfig.json
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\Health Care Web API.dll
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\Health Care Web API.pdb
+D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\AutoMapper.dll
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\Azure.Core.dll
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\Azure.Identity.dll
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\Humanizer.dll
@@ -193,6 +185,7 @@ D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\Microsoft.Ext
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\Microsoft.Extensions.Logging.Console.dll
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\Microsoft.Extensions.Logging.Debug.dll
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\Microsoft.Identity.Client.dll
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
@@ -216,6 +209,7 @@ D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\System.Compos
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\System.Composition.Runtime.dll
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\System.Composition.TypedParts.dll
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\System.Drawing.Common.dll
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\System.Memory.Data.dll
@@ -287,6 +281,15 @@ D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\runtimes\win\
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.csproj.AssemblyReference.cache
+D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\rpswa.dswa.cache.json
+D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.GeneratedMSBuildEditorConfig.editorconfig
+D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.AssemblyInfoInputs.cache
+D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.AssemblyInfo.cs
+D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.csproj.CoreCompileInputs.cache
+D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.MvcApplicationPartsAssemblyInfo.cs
+D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.MvcApplicationPartsAssemblyInfo.cache
+D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.sourcelink.json
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\rjimswa.dswa.cache.json
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
@@ -303,6 +306,3 @@ D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\refint\Health
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.pdb
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\Health Care Web API.genruntimeconfig.cache
 D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\obj\Debug\net8.0\ref\Health Care Web API.dll
-D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\AutoMapper.dll
-D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
-D:\DEPI_.NET_TASKS\SESSION_16\Health Care Web API\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll

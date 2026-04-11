@@ -1,0 +1,17 @@
+[
+  { "Title": "Palace Walk",              "ISBN": "9780385264662", "AuthorId": 1 },
+  { "Title": "Palace of Desire",         "ISBN": "9780385264679", "AuthorId": 1 },
+  { "Title": "Sugar Street",             "ISBN": "9780385264686", "AuthorId": 1 },
+  { "Title": "The Days",                 "ISBN": "9789774160349", "AuthorId": 2 },
+  { "Title": "The Cheapest Nights",      "ISBN": "9780894105449", "AuthorId": 3 },
+  { "Title": "The Map of Love",          "ISBN": "9780747544975", "AuthorId": 4 },
+  { "Title": "The Yacoubian Building",   "ISBN": "9789774247330", "AuthorId": 5 },
+  { "Title": "Chicago",                  "ISBN": "9789774161193", "AuthorId": 5 },
+  { "Title": "The Bleeding of the Stone","ISBN": "9781566563918", "AuthorId": 6 },
+  { "Title": "Nineteen Eighty-Four",     "ISBN": "9780451524935", "AuthorId": 7 },
+  { "Title": "Animal Farm",              "ISBN": "9780451526342", "AuthorId": 7 },
+  { "Title": "The Great Gatsby",         "ISBN": "9780743273565", "AuthorId": 8 },
+  { "Title": "One Hundred Years of Solitude", "ISBN": "9780060883287", "AuthorId": 9 },
+  { "Title": "Love in the Time of Cholera",   "ISBN": "9780307389732", "AuthorId": 9 },
+  { "Title": "War and Peace",            "ISBN": "9780140447934", "AuthorId": 10 }
+]

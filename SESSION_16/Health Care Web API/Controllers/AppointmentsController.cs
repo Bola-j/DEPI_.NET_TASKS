@@ -130,6 +130,8 @@ namespace Health_Care_Web_API.Controllers
         [HttpPut("ByPatientAndDoctor")]
         public async Task<ActionResult<GenericResult<SlimAppointmentDTO>>> Update(UpdateAppointmentRequest request)
         {
+            
+
             if (request == null)
             {
                 _logger.LogWarning("UpdateAppointment request is null.");
@@ -149,15 +151,16 @@ namespace Health_Care_Web_API.Controllers
             }
             else
             {
-                _logger.LogWarning($"Invalid AppointmentDate: {request.AppointmentDate.Value}. Date must be in the future.");
-                return BadRequest(Result.Failure("Appointment date must be in the future."));
+                _logger.LogWarning($"Invalid AppointmentDate: {request.AppointmentDate.Value}. Date must be in the future.\n The date stays as it is.");
+                request.AppointmentDate = appointment.AppointmentDate; // Keep the existing date if the new one is invalid
+                
             }
 
-            _context.Update(appointment);
-            _context.SaveChanges();
+            _mapper.Map(request, appointment);
+            await _context.SaveChangesAsync();
 
             _logger.LogInformation($"Updated appointment for DoctorId: {request.DoctorId} and PatientId: {request.PatientId} with new date: {appointment.AppointmentDate}.");
-            return Ok(GenericResult<SlimAppointmentDTO>.Success(_mapper.Map<SlimAppointmentDTO>(appointment)));
+            return Ok(GenericResult<SlimAppointmentDTO>.Success(_mapper.Map<SlimAppointmentDTO>(_mapper.Map(appointment,new SlimAppointmentDTO()))));
         }
 
         [HttpDelete]

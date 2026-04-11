@@ -1,0 +1,17 @@
+[
+  { "Name": "Wireless Bluetooth Headphones",  "Price": 89.99,  "CategoryId": 1 },
+  { "Name": "Smartphone 128GB",               "Price": 499.00, "CategoryId": 1 },
+  { "Name": "USB-C Charging Hub",             "Price": 34.99,  "CategoryId": 1 },
+  { "Name": "Men's Running Shoes",            "Price": 65.00,  "CategoryId": 2 },
+  { "Name": "Women's Casual T-Shirt",         "Price": 19.99,  "CategoryId": 2 },
+  { "Name": "Denim Jeans",                    "Price": 49.99,  "CategoryId": 2 },
+  { "Name": "Non-Stick Cookware Set",         "Price": 79.99,  "CategoryId": 3 },
+  { "Name": "Air Fryer 5.5L",                "Price": 109.99, "CategoryId": 3 },
+  { "Name": "Yoga Mat",                       "Price": 29.99,  "CategoryId": 4 },
+  { "Name": "Resistance Bands Set",           "Price": 18.99,  "CategoryId": 4 },
+  { "Name": "The Clean Coder",                "Price": 24.99, "CategoryId": 5 },
+  { "Name": "Design Patterns",               "Price": 39.99, "CategoryId": 5 },
+  { "Name": "LEGO Classic Bricks Set",        "Price": 44.99,  "CategoryId": 6 },
+  { "Name": "Board Game Strategy Pack",       "Price": 34.99,  "CategoryId": 6 },
+  { "Name": "Vitamin C Serum",               "Price": 22.99,  "CategoryId": 7 }
+]

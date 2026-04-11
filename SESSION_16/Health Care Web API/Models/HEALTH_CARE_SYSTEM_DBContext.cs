@@ -30,13 +30,11 @@ public partial class HEALTH_CARE_SYSTEM_DBContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Apply Fluent API configurations
-        modelBuilder.ApplyConfiguration(new DoctorConfiguration());
-        modelBuilder.ApplyConfiguration(new PatientConfiguration());
-        modelBuilder.ApplyConfiguration(new AppointmentConfiguration());
+        base.OnModelCreating(modelBuilder);
 
-        OnModelCreatingPartial(modelBuilder);
+
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(HEALTH_CARE_SYSTEM_DBContext).Assembly);
     }
 
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    //partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

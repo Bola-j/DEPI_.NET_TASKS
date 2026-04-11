@@ -28,7 +28,7 @@ namespace Health_Care_Web_API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<GenericResult<IEnumerable<DoctorDTO>>>> GetDoctors(string? name, int page = 1, int pageSize = 10)
+        public async Task<ActionResult<GenericResult<PagedResult<DoctorDTO>>>> GetDoctors(string? name, int page = 1, int pageSize = 10)
         {
             if (page < 1 || pageSize < 1)
             {
@@ -129,9 +129,8 @@ namespace Health_Care_Web_API.Controllers
             }
             else
             {
-                _logger.LogWarning("Attempted to update a doctor with an empty or whitespace name.");
-                return BadRequest(Result.Failure("Doctor name cannot be empty or whitespace."));
-
+                _logger.LogWarning("Attempted to update a doctor with an empty or whitespace name.\n The name stays as it is.");
+                request.Name = doctor.Name; // Keep the existing name if the new one is invalid
             }
             if (!string.IsNullOrWhiteSpace(request.Specialization) || request.Specialization != "" || request.Specialization != "string")
             {
@@ -139,15 +138,15 @@ namespace Health_Care_Web_API.Controllers
             }
             else
             {
-                _logger.LogWarning("Attempted to update a doctor with an empty or whitespace specialization.");
-                return BadRequest(Result.Failure("Doctor specialization cannot be empty or whitespace."));
+                _logger.LogWarning("Attempted to update a doctor with an empty or whitespace specialization.\n The specialization stays as it is.");
+                request.Specialization = doctor.Specialization; // Keep the existing specialization if the new one is invalid
             }
 
-            _context.Doctors.Update(doctor);
+            _mapper.Map(request, doctor);
             await _context.SaveChangesAsync();
 
             _logger.LogInformation($"Updated doctor with Id: {id}, Name: {doctor.Name}, Specialization: {doctor.Specialization}.");
-            return Ok(GenericResult<SlimDoctorDTO>.Success(_mapper.Map<SlimDoctorDTO>(doctor)));
+            return Ok(GenericResult<SlimDoctorDTO>.Success(_mapper.Map<SlimDoctorDTO>(_mapper.Map(doctor,new SlimDoctorDTO()))));
         }
 
         [HttpDelete("{id}")]

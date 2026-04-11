@@ -66,7 +66,7 @@ namespace Health_Care_Web_API.Controllers
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GenericResult<PatientDTO>>> GetPatient(int id, int page = 1, int pageSize = 10)
+        public async Task<ActionResult<GenericResult<PatientDTO>>> GetPatient(int id)
         {
             var patient = await _context.Patients
                 .AsNoTracking()
@@ -131,8 +131,8 @@ namespace Health_Care_Web_API.Controllers
             }
             else
             {
-                _logger.LogWarning("Attempted to update a patient with an empty or whitespace name.");
-                return BadRequest(Result.Failure("Patient name cannot be empty or whitespace."));
+                _logger.LogWarning("Attempted to update a patient with an empty or whitespace name.\n The name Stays as it is");
+                request.Name = patient.Name; // Keep the existing name if the new one is invalid
             }
             if (request.DateOfBirth.HasValue && request.DateOfBirth.Value <= DateOnly.FromDateTime(DateTime.Now))
             {
@@ -142,16 +142,17 @@ namespace Health_Care_Web_API.Controllers
             // means the Date of Birth is entered earlier than today, surely the patient is not born in the future, so we can set the year to 0001, which is the minimum value for DateTime
             else
             {
-                _logger.LogWarning("Attempted to update a patient with an invalid Date of Birth.");
-                return BadRequest(Result.Failure("Date of Birth must be a valid date and cannot be in the future."));
+                _logger.LogWarning("Attempted to update a patient with an invalid Date of Birth.\n The Date of Birth stays as it is.");
+                request.DateOfBirth = DateOnly.FromDateTime(patient.DateOfBirth); // Keep the existing Date of Birth if the new one is invalid
             }
 
-            _context.Update(patient);
+
+            _mapper.Map(request, patient);
             await _context.SaveChangesAsync();
 
             _logger.LogInformation($"Updated patient with Id: {id}.");
 
-            return Ok(GenericResult<SlimPatientDTO>.Success(_mapper.Map<SlimPatientDTO>(patient)));
+            return Ok(GenericResult<SlimPatientDTO>.Success(_mapper.Map<SlimPatientDTO>(_mapper.Map(patient,new SlimPatientDTO()))));
         }
 
         [HttpDelete("{id}")]
