@@ -112,7 +112,7 @@ namespace Health_Care_Web_API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateDoctor(int id, UpdateDoctorRequest request)
+        public async Task<ActionResult<GenericResult<SlimDoctorDTO>>> UpdateDoctor(int id, UpdateDoctorRequest request)
         {
             var doctor = await _context.Doctors.FindAsync(id);
 

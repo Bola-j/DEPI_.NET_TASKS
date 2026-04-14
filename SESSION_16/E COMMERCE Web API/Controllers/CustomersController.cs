@@ -38,12 +38,11 @@ namespace E_COMMERCE_Web_API.Controllers
             }
 
             var query = _context.Customers
-                .Select(c => _mapper.Map<CustomerDto>(c))
                 .AsNoTracking();
 
             var searchTerm = search?.Trim().ToLower();
             if (!string.IsNullOrEmpty(searchTerm))
-                query = query.Where(c => EF.Functions.Like(c.Name.ToLower(), $"%{searchTerm}%"));
+                query = query.Where(c => EF.Functions.Like(c.Name, $"%{searchTerm}%"));
 
             if(!query.Any())
             {
@@ -56,6 +55,7 @@ namespace E_COMMERCE_Web_API.Controllers
             var customers = await query
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
+                .Select(c => _mapper.Map<CustomerDto>(c))
                 .ToListAsync();
 
             _logger.LogInformation($"Retrieved {customers.Count} customers (Page: {page}, PageSize: {pageSize}, TotalCount: {totalCount}).");
@@ -86,7 +86,7 @@ namespace E_COMMERCE_Web_API.Controllers
 
         // POST api/customers
         [HttpPost]
-        public async Task<ActionResult<CustomerDto>> Create(CreateCustomerDto dto)
+        public async Task<ActionResult<GenericResult<CustomerDto>>> Create(CreateCustomerDto dto)
         {
 
             if (string.IsNullOrWhiteSpace(dto.Name) || dto.Name == "" || dto.Name == "string")
@@ -102,7 +102,7 @@ namespace E_COMMERCE_Web_API.Controllers
             }
             else
             {
-                if(!EF.Functions.Like(dto.Email, "%@%.%"))
+                if(!System.Text.RegularExpressions.Regex.IsMatch(dto.Email, @".*@.*\..*"))
                 {
                     _logger.LogWarning("Invalid email format provided.");
                     return BadRequest(GenericResult<CustomerDto>.Failure("Invalid email format."));
@@ -130,7 +130,7 @@ namespace E_COMMERCE_Web_API.Controllers
 
         // PUT api/customers/{id}
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update(int id, UpdateCustomerDto dto)
+        public async Task<ActionResult<GenericResult<CustomerDto>>> Update(int id, UpdateCustomerDto dto)
         {
             var customer = await _context.Customers.FindAsync(id);
 
@@ -153,7 +153,7 @@ namespace E_COMMERCE_Web_API.Controllers
             }
             else
             {
-                if (!EF.Functions.Like(dto.Email, "%@%.%"))
+                if (!System.Text.RegularExpressions.Regex.IsMatch(dto.Email, @".*@.*\..*"))
                 {
                     _logger.LogWarning("Invalid email format provided.");
                     return BadRequest(GenericResult<CustomerDto>.Failure("Invalid email format."));

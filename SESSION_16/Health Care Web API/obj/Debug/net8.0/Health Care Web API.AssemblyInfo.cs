@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Health Care Web API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a5b7025289ef71d2befec397b1c7dab13a9ab651")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d5c9939b039cb3cff49c2353f7d19e1de3e54bb5")]
 [assembly: System.Reflection.AssemblyProductAttribute("Health Care Web API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Health Care Web API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

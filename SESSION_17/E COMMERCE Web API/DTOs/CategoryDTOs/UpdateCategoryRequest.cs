@@ -1,0 +1,7 @@
+﻿namespace E_COMMERCE_Web_API.DTOs.CategoryDTOs
+{
+    public class UpdateCategoryRequest
+    {
+        public string NewName { get; set; }
+    }
+}
