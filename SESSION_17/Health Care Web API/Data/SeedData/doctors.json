@@ -1,0 +1,17 @@
+[
+  { "Name": "Dr. Mohamed Salah",  "Specialization": "Cardiology" },
+  { "Name": "Dr. Amina Youssef",  "Specialization": "Dermatology" },
+  { "Name": "Dr. Hassan Ali",     "Specialization": "Orthopedics" },
+  { "Name": "Dr. Sara Adel",      "Specialization": "Pediatrics" },
+  { "Name": "Dr. Mahmoud Nabil",  "Specialization": "Neurology" },
+  { "Name": "Dr. Dina Samir",     "Specialization": "Gynecology" },
+  { "Name": "Dr. Ahmed Khaled",   "Specialization": "General Surgery" },
+  { "Name": "Dr. Mona Fathy",     "Specialization": "Ophthalmology" },
+  { "Name": "Dr. Youssef Tarek",  "Specialization": "ENT" },
+  { "Name": "Dr. Reem Hassan",    "Specialization": "Psychiatry" },
+  { "Name": "Dr. Khaled Ibrahim", "Specialization": "Urology" },
+  { "Name": "Dr. Laila Mostafa",  "Specialization": "Endocrinology" },
+  { "Name": "Dr. Tamer Adel",     "Specialization": "Oncology" },
+  { "Name": "Dr. Huda Mahmoud",   "Specialization": "Radiology" },
+  { "Name": "Dr. Karim Samir",    "Specialization": "Gastroenterology" }
+]

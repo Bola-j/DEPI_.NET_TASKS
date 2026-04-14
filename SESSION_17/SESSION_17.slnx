@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="E COMMERCE Web API/E COMMERCE Web API.csproj" />
+  <Project Path="Health Care Web API/Health Care Web API.csproj" Id="75e2911e-4f4e-406c-b79f-f6089a8b71b0" />
 </Solution>
