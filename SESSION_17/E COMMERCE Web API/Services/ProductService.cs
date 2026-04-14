@@ -18,27 +18,31 @@ namespace E_COMMERCE_Web_API.Services
 
         public async Task<GenericResult<PagedResult<Product>>> GetAllAsync(string? search, int page, int pageSize)
         {
-            IQueryable<Product> query = _productRepository.Query().Include(p => p.Category);
+            var productsData = await _productRepository.Query()
+                .Include(p => p.Category)
+                .ToListAsync();
 
-            var searchTerm = search?.Trim().ToLower();
+            IEnumerable<Product> query = productsData;
+
+            var searchTerm = search?.Trim();
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
-                query = query.Where(p => EF.Functions.Like(p.Name, $"%{searchTerm}%"));
+                query = query.Where(p => p.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
             }
 
-            var totalCount = await query.CountAsync();
-            var products = await query
+            var totalCount = query.Count();
+            var products = query
                 .OrderBy(p => p.Name)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
-                .ToListAsync();
+                .ToList();
 
             return GenericResult<PagedResult<Product>>.Success(new PagedResult<Product>(products, page, pageSize, totalCount));
         }
 
         public async Task<GenericResult<Product>> GetByIdAsync(int id)
         {
-            var product = await _productRepository.Query()
+            var product = await _productRepository.Query(false)
                 .Include(p => p.Category)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
@@ -56,10 +60,16 @@ namespace E_COMMERCE_Web_API.Services
         public Task<GenericResult<Product>> DeleteAsync(int id)
             => _productRepository.DeleteAsync(id);
 
-        public Task<bool> CategoryExistsAsync(int categoryId)
-            => _categoryRepository.Query().AnyAsync(c => c.Id == categoryId);
+        public async Task<bool> CategoryExistsAsync(int categoryId)
+        {
+            var categories = await _categoryRepository.Query().ToListAsync();
+            return categories.Any(c => c.Id == categoryId);
+        }
 
-        public Task<bool> ProductNameExistsAsync(string name, int? excludedId = null)
-            => _productRepository.Query().AnyAsync(p => p.Name == name && (!excludedId.HasValue || p.Id != excludedId.Value));
+        public async Task<bool> ProductNameExistsAsync(string name, int? excludedId = null)
+        {
+            var products = await _productRepository.Query().ToListAsync();
+            return products.Any(p => p.Name == name && (!excludedId.HasValue || p.Id != excludedId.Value));
+        }
     }
 }

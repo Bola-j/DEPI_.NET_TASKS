@@ -23,25 +23,27 @@ namespace E_COMMERCE_Web_API.Services
 
         public async Task<GenericResult<PagedResult<OrderDetail>>> GetAllAsync(int orderId, int page, int pageSize)
         {
-            IQueryable<OrderDetail> query = _orderDetailRepository.Query()
+            var detailsData = await _orderDetailRepository.Query()
                 .Include(od => od.Order)
                 .Include(od => od.Product)
-                .Where(od => od.OrderId == orderId);
+                .ToListAsync();
 
-            var totalCount = await query.CountAsync();
+            IEnumerable<OrderDetail> query = detailsData.Where(od => od.OrderId == orderId);
 
-            var data = await query
+            var totalCount = query.Count();
+
+            var data = query
                 .OrderBy(od => od.ProductId)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
-                .ToListAsync();
+                .ToList();
 
             return GenericResult<PagedResult<OrderDetail>>.Success(new PagedResult<OrderDetail>(data, page, pageSize, totalCount));
         }
 
         public async Task<GenericResult<OrderDetail>> GetByIdAsync(int orderId, int productId)
         {
-            var detail = await _orderDetailRepository.Query()
+            var detail = await _orderDetailRepository.Query(false)
                 .Include(od => od.Product)
                 .FirstOrDefaultAsync(od => od.OrderId == orderId && od.ProductId == productId);
 
@@ -70,13 +72,22 @@ namespace E_COMMERCE_Web_API.Services
             return await _orderDetailRepository.UpdateAsync(detail);
         }
 
-        public Task<bool> OrderExistsAsync(int orderId)
-            => _orderRepository.Query().AnyAsync(o => o.Id == orderId);
+        public async Task<bool> OrderExistsAsync(int orderId)
+        {
+            var orders = await _orderRepository.Query().ToListAsync();
+            return orders.Any(o => o.Id == orderId);
+        }
 
-        public Task<bool> ProductExistsAsync(int productId)
-            => _productRepository.Query().AnyAsync(p => p.Id == productId);
+        public async Task<bool> ProductExistsAsync(int productId)
+        {
+            var products = await _productRepository.Query().ToListAsync();
+            return products.Any(p => p.Id == productId);
+        }
 
-        public Task<bool> ExistsAsync(int orderId, int productId)
-            => _orderDetailRepository.Query().AnyAsync(od => od.OrderId == orderId && od.ProductId == productId);
+        public async Task<bool> ExistsAsync(int orderId, int productId)
+        {
+            var details = await _orderDetailRepository.Query().ToListAsync();
+            return details.Any(od => od.OrderId == orderId && od.ProductId == productId);
+        }
     }
 }

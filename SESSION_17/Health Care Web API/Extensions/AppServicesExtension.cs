@@ -1,6 +1,8 @@
 ﻿using Health_Care_Web_API.Data;
 using Health_Care_Web_API.Data.Interceptors;
 using Health_Care_Web_API.Mappings;
+using Health_Care_Web_API.Repositories;
+using Health_Care_Web_API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,6 +36,11 @@ namespace Health_Care_Web_API.Extensions
                         new SoftDeleteInterceptor(), new CreatedAtInterceptor(), new CreatedByInterceptor(), new ModifiedByInterceptor(), new ModifiedAtInterceptor()
                         )
                 );
+
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IDoctorService, DoctorService>();
+            services.AddScoped<IPatientService, PatientService>();
+            services.AddScoped<IAppointmentService, AppointmentService>();
             return services;
         }
     }

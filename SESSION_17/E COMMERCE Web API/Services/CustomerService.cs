@@ -16,26 +16,28 @@ namespace E_COMMERCE_Web_API.Services
 
         public async Task<GenericResult<PagedResult<Customer>>> GetAllAsync(string? search, int page, int pageSize)
         {
-            var query = _customerRepository.Query();
+            var customersData = await _customerRepository.Query().ToListAsync();
 
-            var searchTerm = search?.Trim().ToLower();
+            IEnumerable<Customer> query = customersData;
+
+            var searchTerm = search?.Trim();
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
-                query = query.Where(c => EF.Functions.Like(c.Name, $"%{searchTerm}%"));
+                query = query.Where(c => c.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
             }
 
-            var totalCount = await query.CountAsync();
-            var customers = await query
+            var totalCount = query.Count();
+            var customers = query
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
-                .ToListAsync();
+                .ToList();
 
             return GenericResult<PagedResult<Customer>>.Success(new PagedResult<Customer>(customers, page, pageSize, totalCount));
         }
 
         public async Task<GenericResult<Customer>> GetByIdAsync(int id)
         {
-            var customer = await _customerRepository.Query()
+            var customer = await _customerRepository.Query(false)
                 .Include(c => c.Orders)
                 .FirstOrDefaultAsync(c => c.Id == id);
 
@@ -53,7 +55,10 @@ namespace E_COMMERCE_Web_API.Services
         public Task<GenericResult<Customer>> DeleteAsync(int id)
             => _customerRepository.DeleteAsync(id);
 
-        public Task<bool> EmailExistsAsync(string email, int? excludedId = null)
-            => _customerRepository.Query().AnyAsync(c => c.Email == email && (!excludedId.HasValue || c.Id != excludedId.Value));
+        public async Task<bool> EmailExistsAsync(string email, int? excludedId = null)
+        {
+            var customers = await _customerRepository.Query().ToListAsync();
+            return customers.Any(c => c.Email == email && (!excludedId.HasValue || c.Id != excludedId.Value));
+        }
     }
 }

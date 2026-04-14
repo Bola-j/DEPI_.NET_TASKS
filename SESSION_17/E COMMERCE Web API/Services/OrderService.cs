@@ -23,28 +23,30 @@ namespace E_COMMERCE_Web_API.Services
 
         public async Task<GenericResult<PagedResult<Order>>> GetAllAsync(string? search, int page, int pageSize)
         {
-            IQueryable<Order> query = _orderRepository.Query()
-                .Include(o => o.Customer);
+            var loadedOrders = await _orderRepository.Query()
+                .Include(o => o.Customer)
+                .ToListAsync();
+            IEnumerable<Order> query = loadedOrders;
 
-            var searchTerm = search?.Trim().ToLower();
+            var searchTerm = search?.Trim();
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
-                query = query.Where(o => o.Customer != null && EF.Functions.Like(o.Customer.Name, $"%{searchTerm}%"));
+                query = query.Where(o => o.Customer != null && o.Customer.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
             }
 
-            var totalCount = await query.CountAsync();
-            var orders = await query
+            var totalCount = query.Count();
+            var orders = query
                 .OrderByDescending(o => o.OrderDate)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
-                .ToListAsync();
+                .ToList();
 
             return GenericResult<PagedResult<Order>>.Success(new PagedResult<Order>(orders, page, pageSize, totalCount));
         }
 
         public async Task<GenericResult<Order>> GetByIdAsync(int id)
         {
-            var order = await _orderRepository.Query()
+            var order = await _orderRepository.Query(false)
                 .Include(o => o.Customer)
                 .Include(o => o.OrderDetails)
                     .ThenInclude(od => od.Product)
@@ -57,9 +59,8 @@ namespace E_COMMERCE_Web_API.Services
 
         public async Task<GenericResult<IEnumerable<Order>>> GetByCustomerAsync(int customerId)
         {
-            var orders = await _orderRepository.Query()
-                .Where(o => o.CustomerId == customerId)
-                .ToListAsync();
+            var ordersData = await _orderRepository.Query().ToListAsync();
+            var orders = ordersData.Where(o => o.CustomerId == customerId).ToList();
 
             return GenericResult<IEnumerable<Order>>.Success(orders);
         }
@@ -73,16 +74,20 @@ namespace E_COMMERCE_Web_API.Services
         public Task<GenericResult<Order>> DeleteAsync(int id)
             => _orderRepository.DeleteAsync(id);
 
-        public Task<bool> CustomerExistsAsync(int customerId)
-            => _customerRepository.Query().AnyAsync(c => c.Id == customerId);
+        public async Task<bool> CustomerExistsAsync(int customerId)
+        {
+            var customers = await _customerRepository.Query().ToListAsync();
+            return customers.Any(c => c.Id == customerId);
+        }
 
         public async Task<List<int>> GetMissingProductIdsAsync(IEnumerable<int> productIds)
         {
             var ids = productIds.Distinct().ToList();
-            var existingIds = await _productRepository.Query()
+            var products = await _productRepository.Query().ToListAsync();
+            var existingIds = products
                 .Where(p => ids.Contains(p.Id))
                 .Select(p => p.Id)
-                .ToListAsync();
+                .ToList();
 
             return ids.Except(existingIds).ToList();
         }
