@@ -1,0 +1,12 @@
+[
+  { "Name": "Ahmed Hassan",    "MembershipDate": "2022-01-15" },
+  { "Name": "Sara Mohamed",    "MembershipDate": "2022-03-10" },
+  { "Name": "Omar Ali",        "MembershipDate": "2022-06-01" },
+  { "Name": "Mona Ibrahim",    "MembershipDate": "2023-01-20" },
+  { "Name": "Youssef Adel",    "MembershipDate": "2023-04-05" },
+  { "Name": "Nour Khaled",     "MembershipDate": "2023-07-18" },
+  { "Name": "Khaled Samir",    "MembershipDate": "2023-09-22" },
+  { "Name": "Dina Mostafa",    "MembershipDate": "2024-02-11" },
+  { "Name": "Hassan Mahmoud",  "MembershipDate": "2024-05-30" },
+  { "Name": "Laila Farouk",    "MembershipDate": "2024-08-14" }
+]

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using E_COMMERCE_Web_API.Data;
 using Microsoft.EntityFrameworkCore;
-using AutoMapper;
+using E_COMMERCE_Web_API.DTOs.AnalyticsDTOs;
 using E_COMMERCE_Web_API.Results;
 
 namespace E_COMMERCE_Web_API.Controllers
@@ -13,12 +13,10 @@ namespace E_COMMERCE_Web_API.Controllers
     {
         private readonly ECommerceDbContext _context;
         private readonly ILogger<AnalyticsController> _logger;
-        private readonly IMapper _mapper;
-        public AnalyticsController(ECommerceDbContext context, ILogger<AnalyticsController> logger, IMapper mapper)
+        public AnalyticsController(ECommerceDbContext context, ILogger<AnalyticsController> logger)
         {
             _context = context;
             _logger = logger;
-            _mapper = mapper;
         }
 
         [HttpGet("orders/count")]
@@ -75,12 +73,12 @@ namespace E_COMMERCE_Web_API.Controllers
         }
 
         [HttpGet("products/top-selling")]
-        public async Task<ActionResult<GenericResult<IEnumerable<object>>>> GetTopSellingProducts()
+        public async Task<ActionResult<GenericResult<IEnumerable<TopSellingProductDTO>>>> GetTopSellingProducts()
         {
             var topProducts = await _context.OrderDetails
                 .Include(od => od.Product)
                 .GroupBy(od => new { od.ProductId, od.Product.Name })
-                .Select(g => new
+                .Select(g => new TopSellingProductDTO
                 {
                     ProductId = g.Key.ProductId,
                     ProductName = g.Key.Name,
@@ -91,15 +89,15 @@ namespace E_COMMERCE_Web_API.Controllers
                 .ToListAsync();
 
             _logger.LogInformation($"Top 5 selling products retrieved.");
-            return Ok(GenericResult<IEnumerable<object>>.Success(topProducts));
+            return Ok(GenericResult<IEnumerable<TopSellingProductDTO>>.Success(topProducts));
         }
 
         [HttpGet("customers/top")]
-        public async Task<ActionResult<GenericResult<IEnumerable<object>>>> GetTopCustomers()
+        public async Task<ActionResult<GenericResult<IEnumerable<TopCustomerDTO>>>> GetTopCustomers()
         {
             var topCustomers = await _context.Orders
                 .GroupBy(o => new { o.CustomerId, o.Customer.Name })
-                .Select(g => new
+                .Select(g => new TopCustomerDTO
                 {
                     CustomerName = g.Key.Name,
                     TotalSpent = g.SelectMany(o => o.OrderDetails).Sum(od => od.Quantity * od.Product.Price)
@@ -108,7 +106,7 @@ namespace E_COMMERCE_Web_API.Controllers
                 .Take(5)
                 .ToListAsync();
             _logger.LogInformation($"Top 5 customers retrieved based on total spending.");
-            return Ok(GenericResult<IEnumerable<object>>.Success(topCustomers));
+            return Ok(GenericResult<IEnumerable<TopCustomerDTO>>.Success(topCustomers));
         }
 
     }

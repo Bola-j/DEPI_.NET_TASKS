@@ -1,0 +1,12 @@
+[
+  { "Name": "Naguib Mahfouz",    "BirthDate": "1911-12-11" },
+  { "Name": "Taha Hussein",      "BirthDate": "1889-11-14" },
+  { "Name": "Yusuf Idris",       "BirthDate": "1927-05-19" },
+  { "Name": "Ahdaf Soueif",      "BirthDate": "1950-03-23" },
+  { "Name": "Alaa Al Aswany",    "BirthDate": "1957-05-26" },
+  { "Name": "Ibrahim Al-Koni",   "BirthDate": "1948-02-01" },
+  { "Name": "George Orwell",     "BirthDate": "1903-06-25" },
+  { "Name": "F. Scott Fitzgerald","BirthDate": "1896-09-24" },
+  { "Name": "Gabriel García Márquez", "BirthDate": "1927-03-06" },
+  { "Name": "Leo Tolstoy",       "BirthDate": "1828-09-09" }
+]

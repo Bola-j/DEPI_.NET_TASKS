@@ -1,0 +1,22 @@
+[
+  { "BookId": 1,  "BorrowerId": 1,  "LoanDate": "2025-01-05", "ReturnDate": "2025-01-19" },
+  { "BookId": 2,  "BorrowerId": 2,  "LoanDate": "2025-01-10", "ReturnDate": "2025-01-24" },
+  { "BookId": 3,  "BorrowerId": 3,  "LoanDate": "2025-01-15", "ReturnDate": null },
+  { "BookId": 4,  "BorrowerId": 4,  "LoanDate": "2025-02-01", "ReturnDate": "2025-02-15" },
+  { "BookId": 5,  "BorrowerId": 5,  "LoanDate": "2025-02-10", "ReturnDate": null },
+  { "BookId": 6,  "BorrowerId": 6,  "LoanDate": "2025-02-20", "ReturnDate": "2025-03-06" },
+  { "BookId": 7,  "BorrowerId": 7,  "LoanDate": "2025-03-01", "ReturnDate": "2025-03-15" },
+  { "BookId": 8,  "BorrowerId": 8,  "LoanDate": "2025-03-10", "ReturnDate": null },
+  { "BookId": 9,  "BorrowerId": 9,  "LoanDate": "2025-03-20", "ReturnDate": "2025-04-03" },
+  { "BookId": 10, "BorrowerId": 10, "LoanDate": "2025-04-01", "ReturnDate": null },
+  { "BookId": 11, "BorrowerId": 1,  "LoanDate": "2025-04-05", "ReturnDate": "2025-04-19" },
+  { "BookId": 12, "BorrowerId": 2,  "LoanDate": "2025-04-10", "ReturnDate": null },
+  { "BookId": 13, "BorrowerId": 3,  "LoanDate": "2025-05-01", "ReturnDate": "2025-05-15" },
+  { "BookId": 14, "BorrowerId": 4,  "LoanDate": "2025-05-10", "ReturnDate": null },
+  { "BookId": 15, "BorrowerId": 5,  "LoanDate": "2025-05-20", "ReturnDate": "2025-06-03" },
+  { "BookId": 1,  "BorrowerId": 6,  "LoanDate": "2025-06-01", "ReturnDate": null },
+  { "BookId": 3,  "BorrowerId": 7,  "LoanDate": "2025-06-10", "ReturnDate": "2025-06-24" },
+  { "BookId": 5,  "BorrowerId": 8,  "LoanDate": "2025-07-01", "ReturnDate": null },
+  { "BookId": 7,  "BorrowerId": 9,  "LoanDate": "2025-07-15", "ReturnDate": "2025-07-29" },
+  { "BookId": 10, "BorrowerId": 10, "LoanDate": "2025-08-01", "ReturnDate": null }
+]
