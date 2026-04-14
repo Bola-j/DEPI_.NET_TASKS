@@ -183,17 +183,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ObjectIEnumerableGenericResult"
+                  "$ref": "#/components/schemas/TopSellingProductDTOIEnumerableGenericResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ObjectIEnumerableGenericResult"
+                  "$ref": "#/components/schemas/TopSellingProductDTOIEnumerableGenericResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ObjectIEnumerableGenericResult"
+                  "$ref": "#/components/schemas/TopSellingProductDTOIEnumerableGenericResult"
                 }
               }
             }
@@ -212,17 +212,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ObjectIEnumerableGenericResult"
+                  "$ref": "#/components/schemas/TopCustomerDTOIEnumerableGenericResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ObjectIEnumerableGenericResult"
+                  "$ref": "#/components/schemas/TopCustomerDTOIEnumerableGenericResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ObjectIEnumerableGenericResult"
+                  "$ref": "#/components/schemas/TopCustomerDTOIEnumerableGenericResult"
                 }
               }
             }
@@ -1890,31 +1890,6 @@
         },
         "additionalProperties": false
       },
-      "ObjectIEnumerableGenericResult": {
-        "type": "object",
-        "properties": {
-          "isSuccess": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "isFailure": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "error": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "value": {
-            "type": "array",
-            "items": { },
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
       "OrderDetailDto": {
         "type": "object",
         "properties": {
@@ -2323,6 +2298,92 @@
           "ProductPrice": {
             "type": "number",
             "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TopCustomerDTO": {
+        "type": "object",
+        "properties": {
+          "customerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalSpent": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TopCustomerDTOIEnumerableGenericResult": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isFailure": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TopCustomerDTO"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TopSellingProductDTO": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productName": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalQuantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TopSellingProductDTOIEnumerableGenericResult": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isFailure": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TopSellingProductDTO"
+            },
+            "nullable": true,
+            "readOnly": true
           }
         },
         "additionalProperties": false
