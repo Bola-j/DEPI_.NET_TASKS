@@ -1,12 +1,11 @@
-﻿using E_COMMERCE_Web_API.Data;
-using E_COMMERCE_Web_API.DTOs.OrderDetailDTO;
+﻿using E_COMMERCE_Web_API.DTOs.OrderDetailDTO;
 using E_COMMERCE_Web_API.DTOs.OrderDTOs;
 using AutoMapper;
 using E_COMMERCE_Web_API.DTOs;
 using E_COMMERCE_Web_API.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using E_COMMERCE_Web_API.Results;
+using E_COMMERCE_Web_API.Services;
 
 namespace E_COMMERCE_Web_API.Controllers
 {
@@ -14,13 +13,13 @@ namespace E_COMMERCE_Web_API.Controllers
     [Route("api/[controller]")]
     public class OrdersController : ControllerBase
     {
-        private readonly ECommerceDbContext _context;
+        private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
         private readonly ILogger<OrdersController> _logger;
 
-        public OrdersController(ECommerceDbContext context, IMapper mapper, ILogger<OrdersController> logger)
+        public OrdersController(IOrderService orderService, IMapper mapper, ILogger<OrdersController> logger)
         {
-            _context = context;
+            _orderService = orderService;
             _mapper = mapper;
             _logger = logger;
         }
@@ -34,46 +33,32 @@ namespace E_COMMERCE_Web_API.Controllers
                 _logger.LogWarning($"Invalid pagination parameters: page={page}, pageSize={pageSize}");
                 return BadRequest("Page and pageSize must be greater than 0.");
             }
-            var query = _context.Orders
-                .Include(o => o.Customer)
-                .AsNoTracking();
-            var searchTerm = search?.Trim().ToLower();
-            if (!string.IsNullOrWhiteSpace(searchTerm)) 
-            { 
-                query = query.Where(o => EF.Functions.Like(o.Customer.Name, $"%{searchTerm}%"));
+            var result = await _orderService.GetAllAsync(search, page, pageSize);
+            if (result.IsFailure)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, GenericResult<PagedResult<OrderDto>>.Failure(result.Error));
             }
 
-            var totalCount = await query.CountAsync();
-            
-            var orders = await query
-                .OrderByDescending(o => o.OrderDate)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .Select(o => _mapper.Map<OrderDto>(o))
-                .ToListAsync();
+            var orders = result.Value.Data.Select(_mapper.Map<OrderDto>).ToList();
 
 
-            return Ok(GenericResult<PagedResult<OrderDto>>.Success(new PagedResult<OrderDto>(orders, page, pageSize, totalCount)));
+            return Ok(GenericResult<PagedResult<OrderDto>>.Success(new PagedResult<OrderDto>(orders, page, pageSize, result.Value.TotalCount)));
         }
 
         // GET api/orders/{id}
         [HttpGet("{id:int}")]
         public async Task<ActionResult<GenericResult<OrderWithDetailsDto>>> GetById(int id)
         {
-            var order = await _context.Orders
-                .Include(o => o.Customer)
-                .Include(o => o.OrderDetails)
-                    .ThenInclude(od => od.Product)
-                .FirstOrDefaultAsync(o => o.Id == id);
+            var result = await _orderService.GetByIdAsync(id);
 
-            if (order is null)
+            if (result.IsFailure)
             {
 
                 _logger.LogWarning($"Order with id {id} was not found.");
                 return NotFound(GenericResult<OrderWithDetailsDto>.Failure($"Order with id {id} was not found."));
             }
 
-            var dto = _mapper.Map<OrderWithDetailsDto>(order);
+            var dto = _mapper.Map<OrderWithDetailsDto>(result.Value);
 
             return Ok(GenericResult<OrderWithDetailsDto>.Success(dto));
         }
@@ -82,17 +67,20 @@ namespace E_COMMERCE_Web_API.Controllers
         [HttpGet("customer/{customerId:int}")]
         public async Task<ActionResult<GenericResult<OrderDto>>> GetByCustomer(int customerId)
         {
-            var customerExists = await _context.Customers.AnyAsync(c => c.Id == customerId);
+            var customerExists = await _orderService.CustomerExistsAsync(customerId);
             if (!customerExists)
             {
                 _logger.LogWarning($"Customer with id {customerId} was not found.");
                 return NotFound(GenericResult<IEnumerable<OrderDto>>.Failure($"Customer with id {customerId} was not found."));
             }
 
-            var orders = await _context.Orders
-                .Where(o => o.CustomerId == customerId)
-                .Select(o => _mapper.Map<OrderDto>(o))
-                .ToListAsync();
+            var ordersResult = await _orderService.GetByCustomerAsync(customerId);
+            if (ordersResult.IsFailure)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, GenericResult<IEnumerable<OrderDto>>.Failure(ordersResult.Error));
+            }
+
+            var orders = ordersResult.Value.Select(_mapper.Map<OrderDto>).ToList();
 
             return Ok(GenericResult<IEnumerable<OrderDto>>.Success(orders));
         }
@@ -101,7 +89,7 @@ namespace E_COMMERCE_Web_API.Controllers
         [HttpPost]
         public async Task<ActionResult<GenericResult<OrderDto>>> Create(CreateOrderDto dto)
         {
-            var customerExists = await _context.Customers.AnyAsync(c => c.Id == dto.CustomerId);
+            var customerExists = await _orderService.CustomerExistsAsync(dto.CustomerId);
             if (!customerExists)
             {
                 _logger.LogWarning($"Customer with id {dto.CustomerId} was not found.");
@@ -110,10 +98,7 @@ namespace E_COMMERCE_Web_API.Controllers
 
             // Validate all product ids up front
             var productIds = dto.OrderDetails.Select(od => od.ProductId).Distinct().ToList();
-            var missingProducts = await _context.Products
-                .Where(p => !productIds.Contains(p.Id))
-                .Select(p => p.Id)
-                .ToListAsync();
+            var missingProducts = await _orderService.GetMissingProductIdsAsync(productIds);
             //var missingProducts = productIds.Except(foundProducts).ToList();
             if (missingProducts.Any())
             {
@@ -124,8 +109,11 @@ namespace E_COMMERCE_Web_API.Controllers
             var order = _mapper.Map<Order>(dto);
 
             _logger.LogInformation($"Creating new order for customer {dto.CustomerId} with {dto.OrderDetails.Count} details.");
-            _context.Orders.Add(order);
-            await _context.SaveChangesAsync();
+            var createResult = await _orderService.CreateAsync(order);
+            if (createResult.IsFailure)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, GenericResult<OrderDto>.Failure(createResult.Error));
+            }
             _logger.LogInformation($"Order created with id {order.Id}.");
 
 
@@ -138,12 +126,14 @@ namespace E_COMMERCE_Web_API.Controllers
         [HttpPut("{id:int}")]
         public async Task<ActionResult<GenericResult<OrderDto>>> Update(int id, UpdateOrderDto dto)
         {
-            var order = await _context.Orders.FindAsync(id);
+            var getResult = await _orderService.GetByIdAsync(id);
 
-            if (order is null)
+            if (getResult.IsFailure)
             { 
                 return NotFound(GenericResult<OrderDto>.Failure($"Order with id {id} was not found."));
             }
+
+            var order = getResult.Value;
 
             if (!(dto.OrderDate is not null && dto.OrderDate.HasValue && dto.OrderDate.Value <= DateTime.Now))
             {
@@ -153,7 +143,11 @@ namespace E_COMMERCE_Web_API.Controllers
 
             _mapper.Map(dto, order);
             _logger.LogInformation($"Updating order {id} with new OrderDate: {dto.OrderDate}");
-            await _context.SaveChangesAsync();
+            var updateResult = await _orderService.UpdateAsync(order);
+            if (updateResult.IsFailure)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, GenericResult<OrderDto>.Failure(updateResult.Error));
+            }
             _logger.LogInformation($"Order {id} updated successfully.");
             return Ok(GenericResult<OrderDto>.Success(_mapper.Map<OrderDto>(order)));
         }
@@ -162,22 +156,18 @@ namespace E_COMMERCE_Web_API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<GenericResult<OrderDto>>> Delete(int id)
         {
-            var order = await _context.Orders
-                .Include(o => o.OrderDetails)
-                .FirstOrDefaultAsync(o => o.Id == id);
+            var deleteResult = await _orderService.DeleteAsync(id);
 
-            if (order is null)
+            if (deleteResult.IsFailure)
             {
                 _logger.LogWarning($"Order with id {id} was not found for deletion.");
                 return NotFound(GenericResult<OrderDto>.Failure($"Order with id {id} was not found."));
             }
 
 
-            _context.Orders.Remove(order); // cascade will handle OrderDetails
-            await _context.SaveChangesAsync();
             _logger.LogInformation($"Order with id {id} was deleted successfully.");
 
-            return Ok(GenericResult<OrderDto>.Success(_mapper.Map<OrderDto>(order)));
+            return Ok(GenericResult<OrderDto>.Success(_mapper.Map<OrderDto>(deleteResult.Value)));
         }
     }
 }

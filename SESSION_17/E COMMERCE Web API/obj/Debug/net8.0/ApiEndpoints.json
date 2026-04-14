@@ -595,6 +595,11 @@
     "Order": 0,
     "Parameters": [
       {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
         "Name": "page",
         "Type": "System.Int32",
         "IsRequired": false
@@ -603,11 +608,6 @@
         "Name": "pageSize",
         "Type": "System.Int32",
         "IsRequired": false
-      },
-      {
-        "Name": "orderId",
-        "Type": "",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": [

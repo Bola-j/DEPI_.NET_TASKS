@@ -2,13 +2,12 @@
 using E_COMMERCE_Web_API.DTOs.ProductsDTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using E_COMMERCE_Web_API.Data;
 using E_COMMERCE_Web_API.Entities;
 using E_COMMERCE_Web_API.DTOs.ProductsDTOs;
 using E_COMMERCE_Web_API.DTOs.CategoryDTOs;
 using AutoMapper;
 using E_COMMERCE_Web_API.Results;
+using E_COMMERCE_Web_API.Services;
 
 namespace E_COMMERCE_Web_API.Controllers
 {
@@ -16,13 +15,13 @@ namespace E_COMMERCE_Web_API.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly ECommerceDbContext _context;
+        private readonly ICategoryService _categoryService;
         private readonly ILogger<CategoriesController> _logger;
         private readonly IMapper _mapper;
 
-        public CategoriesController(ECommerceDbContext context, ILogger<CategoriesController> logger, IMapper mapper)
+        public CategoriesController(ICategoryService categoryService, ILogger<CategoriesController> logger, IMapper mapper)
         {
-            _context = context;
+            _categoryService = categoryService;
             _logger = logger;
             _mapper = mapper;
         }
@@ -36,46 +35,33 @@ namespace E_COMMERCE_Web_API.Controllers
                 return BadRequest(GenericResult<PagedResult<CategoryDTO>>.Failure("Page and PageSize must be greater than 0."));
             }
 
-            var query = _context.Categories
-                .Include(c => c.Products)
-                .AsNoTracking();
+            var result = await _categoryService.GetAllAsync(search, page, pageSize);
+            if (result.IsFailure)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, GenericResult<PagedResult<CategoryDTO>>.Failure(result.Error));
+            }
 
-            var searchTerm = search?.Trim().ToLower(); 
-            if (!string.IsNullOrEmpty(searchTerm))
-                query = query.Where(c => EF.Functions.Like(c.Name, $"%{searchTerm}%"));
+            var categories = result.Value.Data.Select(_mapper.Map<CategoryDTO>).ToList();
 
+            _logger.LogInformation($"Retrieved {categories.Count} categories (Page: {page}, PageSize: {pageSize}, TotalCount: {result.Value.TotalCount}).");
 
-            var totalCount = await query.CountAsync();
-
-            var categories = await query
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .Select(c => _mapper.Map<CategoryDTO>(c))
-                .ToListAsync();
-
-            _logger.LogInformation($"Retrieved {categories.Count} categories (Page: {page}, PageSize: {pageSize}, TotalCount: {totalCount}).");
-
-            return Ok(GenericResult<PagedResult<CategoryDTO>>.Success(new PagedResult<CategoryDTO>(categories, page, pageSize, totalCount)));
+            return Ok(GenericResult<PagedResult<CategoryDTO>>.Success(new PagedResult<CategoryDTO>(categories, page, pageSize, result.Value.TotalCount)));
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<GenericResult<CategoryDTO>>> GetCategoryById(int id)
         {
-            var category = await _context.Categories
-                .Include(c => c.Products)
-                .Where(c => c.Id == id)
-                .Select(c => _mapper.Map<CategoryDTO>(c))
-                .FirstOrDefaultAsync();
+            var result = await _categoryService.GetByIdAsync(id);
 
 
-            if (category == null)
+            if (result.IsFailure)
             {
                 _logger.LogWarning($"Category with id {id} was not found.");
                 return NotFound(GenericResult<CategoryDTO>.Failure($"Category with id {id} not found."));
             }
 
             _logger.LogInformation($"Retrieved category with id {id}.");
-            return Ok(GenericResult<CategoryDTO>.Success(category));
+            return Ok(GenericResult<CategoryDTO>.Success(_mapper.Map<CategoryDTO>(result.Value)));
         }
         [HttpPost]
         public async Task<ActionResult<GenericResult<SlimCategoryDTO>>> CreateCategory(CreateCategoryRequest request)
@@ -89,8 +75,11 @@ namespace E_COMMERCE_Web_API.Controllers
             var category = _mapper.Map<Category>(request);
             
             _logger.LogInformation($"Creating new category with name: {category.Name}.");
-            _context.Categories.Add(category);
-            await _context.SaveChangesAsync();
+            var createResult = await _categoryService.CreateAsync(category);
+            if (createResult.IsFailure)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, GenericResult<SlimCategoryDTO>.Failure(createResult.Error));
+            }
             _logger.LogInformation($"Category created with id: {category.Id}.");
 
             //var response = new SlimCategoryDTO
@@ -110,8 +99,8 @@ namespace E_COMMERCE_Web_API.Controllers
                 return BadRequest(GenericResult<SlimCategoryDTO>.Failure("Category data is required."));
             }
 
-            var category = await _context.Categories.FindAsync(id);
-            if (category != null)
+            var getResult = await _categoryService.GetByIdAsync(id);
+            if (getResult.IsSuccess)
             {
                 if (string.IsNullOrWhiteSpace(request.NewName) || request.NewName == "" || request.NewName == "string")
                 {
@@ -125,10 +114,16 @@ namespace E_COMMERCE_Web_API.Controllers
                 return NotFound(GenericResult<SlimCategoryDTO>.Failure($"Category with id {id} was not found."));
             }
 
+            var category = getResult.Value;
+
             _mapper.Map(request, category);
 
 
-            await _context.SaveChangesAsync();
+            var updateResult = await _categoryService.UpdateAsync(category);
+            if (updateResult.IsFailure)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, GenericResult<SlimCategoryDTO>.Failure(updateResult.Error));
+            }
 
             return Ok(GenericResult<SlimCategoryDTO>.Success(_mapper.Map<SlimCategoryDTO>(category)));
         }
@@ -136,18 +131,16 @@ namespace E_COMMERCE_Web_API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<GenericResult<SlimCategoryDTO>>> DeleteCategory(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null)
+            var deleteResult = await _categoryService.DeleteAsync(id);
+            if (deleteResult.IsFailure)
             {
                 _logger.LogWarning($"Category with id {id} was not found for deletion.");
                 return NotFound(GenericResult<SlimCategoryDTO>.Failure($"Category with id {id} was not found."));
             }
             
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
             _logger.LogInformation($"Category with id {id} was deleted successfully.");
 
-            return Ok(GenericResult<SlimCategoryDTO>.Success(_mapper.Map<SlimCategoryDTO>(category)));
+            return Ok(GenericResult<SlimCategoryDTO>.Success(_mapper.Map<SlimCategoryDTO>(deleteResult.Value)));
         }
     }
 }

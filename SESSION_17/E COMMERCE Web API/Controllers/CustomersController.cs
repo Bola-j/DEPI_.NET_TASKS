@@ -1,11 +1,10 @@
 ﻿using Azure.Core;
-using E_COMMERCE_Web_API.Data;
 using E_COMMERCE_Web_API.DTOs.CustomerDTOs;
 using E_COMMERCE_Web_API.DTOs.OrderDTOs;
 using E_COMMERCE_Web_API.Entities;
 using E_COMMERCE_Web_API.Results;
+using E_COMMERCE_Web_API.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 
 
@@ -15,14 +14,14 @@ namespace E_COMMERCE_Web_API.Controllers
     [Route("api/[controller]")]
     public class CustomersController : ControllerBase
     {
-        private readonly ECommerceDbContext _context;
+        private readonly ICustomerService _customerService;
         private readonly ILogger<CustomersController> _logger;
         private readonly IMapper _mapper;
 
 
-        public CustomersController(ECommerceDbContext context, ILogger<CustomersController> logger, IMapper mapper)
+        public CustomersController(ICustomerService customerService, ILogger<CustomersController> logger, IMapper mapper)
         {
-            _context = context;
+            _customerService = customerService;
             _logger = logger;
             _mapper = mapper;
         }
@@ -37,47 +36,38 @@ namespace E_COMMERCE_Web_API.Controllers
                 return BadRequest(GenericResult<PagedResult<CustomerDto>>.Failure("Page and PageSize must be greater than 0."));
             }
 
-            var query = _context.Customers
-                .AsNoTracking();
-
-            var searchTerm = search?.Trim().ToLower();
-            if (!string.IsNullOrEmpty(searchTerm))
-                query = query.Where(c => EF.Functions.Like(c.Name, $"%{searchTerm}%"));
-
-            if(!query.Any())
+            var result = await _customerService.GetAllAsync(search, page, pageSize);
+            if (result.IsFailure)
             {
-                _logger.LogWarning($"No customers found matching search term: {searchTerm}.");
+                return StatusCode(StatusCodes.Status500InternalServerError, GenericResult<PagedResult<CustomerDto>>.Failure(result.Error));
+            }
+
+            if(!result.Value.Data.Any())
+            {
+                _logger.LogWarning($"No customers found matching search term: {search?.Trim().ToLower()}.");
                 return NotFound(GenericResult<PagedResult<CustomerDto>>.Failure("No customers found matching the search criteria."));
             }
 
-            var totalCount = await query.CountAsync();
+            var customers = result.Value.Data.Select(_mapper.Map<CustomerDto>).ToList();
 
-            var customers = await query
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .Select(c => _mapper.Map<CustomerDto>(c))
-                .ToListAsync();
+            _logger.LogInformation($"Retrieved {customers.Count} customers (Page: {page}, PageSize: {pageSize}, TotalCount: {result.Value.TotalCount}).");
 
-            _logger.LogInformation($"Retrieved {customers.Count} customers (Page: {page}, PageSize: {pageSize}, TotalCount: {totalCount}).");
-
-            return Ok(GenericResult<PagedResult<CustomerDto>>.Success(new PagedResult<CustomerDto>(customers, page, pageSize, totalCount)));
+            return Ok(GenericResult<PagedResult<CustomerDto>>.Success(new PagedResult<CustomerDto>(customers, page, pageSize, result.Value.TotalCount)));
         }
 
         // GET api/customers/{id}
         [HttpGet("{id:int}")]
         public async Task<ActionResult<GenericResult<CustomerWithOrdersDto>>> GetById(int id)
         {
-            var customer = await _context.Customers
-                .Include(c => c.Orders)
-                .FirstOrDefaultAsync(c => c.Id == id);
+            var result = await _customerService.GetByIdAsync(id);
 
-            if (customer is null)
+            if (result.IsFailure)
             {
                 _logger.LogWarning($"Customer with id {id} was not found.");
                 return NotFound(GenericResult<CustomerWithOrdersDto>.Failure($"Customer with id {id} was not found."));
             }
 
-            var dto = _mapper.Map<CustomerWithOrdersDto>(customer);
+            var dto = _mapper.Map<CustomerWithOrdersDto>(result.Value);
 
             return Ok(GenericResult<CustomerWithOrdersDto>.Success(dto));
         }
@@ -108,8 +98,7 @@ namespace E_COMMERCE_Web_API.Controllers
                     return BadRequest(GenericResult<CustomerDto>.Failure("Invalid email format."));
                 }
             }
-            var emailTaken = await _context.Customers
-                .AnyAsync(c => c.Email == dto.Email);
+            var emailTaken = await _customerService.EmailExistsAsync(dto.Email);
 
             if (emailTaken )
             {
@@ -120,14 +109,17 @@ namespace E_COMMERCE_Web_API.Controllers
             var customer = _mapper.Map<Customer>(dto);
 
             _logger.LogInformation($"Creating new customer: {customer.Name} with email {customer.Email}.");
-            _context.Customers.Add(customer);
-            await _context.SaveChangesAsync();
+            var createResult = await _customerService.CreateAsync(customer);
+            if (createResult.IsFailure)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, GenericResult<CustomerDto>.Failure(createResult.Error));
+            }
 
             _logger.LogInformation($"Customer created with id {customer.Id} in the database.");
 
             _logger.LogInformation($"Setting CreatedBy for customer with id {customer.Id} to {customer.Id}.");
             customer.CreatedBy = customer.Id;
-            await _context.SaveChangesAsync();
+            await _customerService.UpdateAsync(customer);
             _logger.LogInformation($"CreatedBy for customer with id {customer.Id} set to {customer.Id} successfully.");
 
 
@@ -139,13 +131,15 @@ namespace E_COMMERCE_Web_API.Controllers
         [HttpPut("{id:int}")]
         public async Task<ActionResult<GenericResult<CustomerDto>>> Update(int id, UpdateCustomerDto dto)
         {
-            var customer = await _context.Customers.FindAsync(id);
+            var getResult = await _customerService.GetByIdAsync(id);
 
-            if (customer is null)
+            if (getResult.IsFailure)
             {
                 _logger.LogWarning($"Customer with id {id} was not found.");
                 return NotFound(GenericResult<CustomerDto>.Failure($"Customer with id {id} was not found."));
             }
+
+            var customer = getResult.Value;
 
             if (string.IsNullOrWhiteSpace(dto.Name) || dto.Name == "" || dto.Name == "string")
             {
@@ -168,7 +162,11 @@ namespace E_COMMERCE_Web_API.Controllers
             }
 
             _mapper.Map(dto, customer);
-            await _context.SaveChangesAsync();
+            var updateResult = await _customerService.UpdateAsync(customer);
+            if (updateResult.IsFailure)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, GenericResult<CustomerDto>.Failure(updateResult.Error));
+            }
             _logger.LogInformation($"Customer with id {id} updated successfully.");
             return Ok(GenericResult<CustomerDto>.Success(_mapper.Map<CustomerDto>(customer)));
         }
@@ -177,20 +175,17 @@ namespace E_COMMERCE_Web_API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<GenericResult<CustomerDto>>> Delete(int id)
         {
-            var customer = await _context.Customers.FindAsync(id);
+            var deleteResult = await _customerService.DeleteAsync(id);
 
-            if (customer is null)
+            if (deleteResult.IsFailure)
             {
                 _logger.LogWarning($"Customer with id {id} was not found.");
                 return NotFound(GenericResult<CustomerDto>.Failure($"Customer with id {id} was not found."));
             }
 
-
-            _context.Customers.Remove(customer);
-            await _context.SaveChangesAsync();
             _logger.LogInformation($"Customer with id {id} deleted successfully.");
 
-            return Ok(GenericResult<CustomerDto>.Success(_mapper.Map<CustomerDto>(customer)));
+            return Ok(GenericResult<CustomerDto>.Success(_mapper.Map<CustomerDto>(deleteResult.Value)));
         }
     }
 }

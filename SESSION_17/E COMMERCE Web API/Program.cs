@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using E_COMMERCE_Web_API.Extensions;
 
 namespace E_COMMERCE_Web_API
 {
@@ -22,44 +23,10 @@ namespace E_COMMERCE_Web_API
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
 
-            builder.Services.AddControllers()
-                .ConfigureApiBehaviorOptions(options =>
-                {
-                    options.InvalidModelStateResponseFactory = context =>
-                    {
-                        return new BadRequestObjectResult(context.ModelState);
-                    };
-                });
-            builder.Services.AddControllers()
-                .ConfigureApiBehaviorOptions(options =>
-                {
-                    options.SuppressModelStateInvalidFilter = true;
-                });
-            builder.Services.AddAutoMapper(cfg => { }, typeof(MappingProfile));
-
-            builder.Services.AddDbContext<ECommerceDbContext>(options =>
-                options.UseSqlServer(
-                    builder.Configuration.GetConnectionString("DefaultConnection"))
-                    .AddInterceptors(new SoftDeleteInterceptor())
-                    .AddInterceptors(new CreatedAtInterceptor())
-                    .AddInterceptors(new CreatedByInterceptor())
-                    .AddInterceptors(new ModifiedAtInterceptor())
-                    .AddInterceptors(new ModifiedByInterceptor())
-
-
-                );
-
-            builder.Services.AddControllers().AddJsonOptions(options =>
-                {
-                    options.JsonSerializerOptions.Converters.Add(new NullNormalizingStringConverter());
-                });
+            builder.Services.AddAppServices(builder.Configuration);
 
             builder.Services.AddScoped<DataSeeder>();
-
-
             var app = builder.Build();
 
             using (var scope = app.Services.CreateScope())
